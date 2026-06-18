@@ -1,119 +1,124 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Configuración para que los acentos y las eñes se lean correctamente -->
     <meta charset="UTF-8">
-    
-    <!-- Línea clave para que la página sea responsive y se adapte al tamaño de cualquier celular -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Registro Animal - Iniciar Sesión</title>
-    
-    <!-- Enlace a tu archivo de estilos CSS -->
-    <link rel="stylesheet" href="style.css">
+    <title>Registro Animal - Gestión Inteligente de tu Ganado</title>
+    <link rel="stylesheet" href="css/welcome.css">
 </head>
 <body>
 
-    <!-- Contenedor principal de la tarjeta de inicio de sesión -->
-    <main class="login-container">
-
-        <!-- SECCIÓN IZQUIERDA: Panel informativo (El fondo se maneja desde el CSS con 'img/portada.png') -->
-        <section class="info-panel">
-            <div class="logo-container">
-                <div class="logo-icon"></div> 
-                <h1>Registro <span>Animal</span></h1>
+    <header class="main-header">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span class="logo-text">Registro <span class="green-text">Animal</span></span>
             </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#" class="active">Inicio</a></li>
+                    <li><a href="#about">¿Quiénes somos?</a></li>
+                    <li><a href="#features">Características</a></li>
+                    <li><a href="#">Precios</a></li>
+                    <li><a href="#">Recursos</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <a href="login.html" class="btn-nav-login">Iniciar sesión</a>
+            </div>
+        </div>
+    </header>
 
-            <p class="slogan">Gestiona y registra la información de tus animales de forma simple y segura.</p>
-
-            <!-- Bloque de características/beneficios en la parte inferior -->
-            <div class="features-grid">
-                <article class="feature-item">
-                    <div class="icon-secure"></div>
-                    <h2>Información segura</h2>
-                    <p>Protegemos los datos de tus animales</p>
-                </article>
-
-                <article class="feature-item">
-                    <div class="icon-management"></div>
-                    <h2>Gestión eficiente</h2>
-                    <p>Lleva el control de tu ganado fácilmente</p>
-                </article>
-
-                <article class="feature-item">
-                    <div class="icon-access"></div>
-                    <h2>Acceso en cualquier lugar</h2>
-                    <p>Consulta tu información desde cualquier dispositivo</p>
-                </article>
+    <main>
+        <!-- HERO CON CARRUSEL INTEGRADO -->
+        <section class="hero-section">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <span class="badge">PLATAFORMA #1 EN GESTIÓN ANIMAL</span>
+                    <h1>Toda la información de tus animales, en <span class="green-text">un solo lugar</span></h1>
+                    <p>La plataforma completa para registrar, gestionar y analizar toda la información de tu ganado de forma simple, segura y accesible desde cualquier dispositivo.</p>
+                    <div class="hero-buttons">
+                        <a href="login.html" class="btn-primary">Comenzar ahora &rarr;</a>
+                    </div>
+                </div>
+                <!-- Carrusel -->
+                <div class="hero-carousel">
+                    <div class="carousel-track">
+                        <div class="carousel-slide active"><img src="img/img1.png" alt="Gestión"></div>
+                        <div class="carousel-slide"><img src="img/img2.png" alt="Salud"></div>
+                        <div class="carousel-slide"><img src="img/img3.png" alt="Reportes"></div>
+                        <div class="carousel-slide"><img src="img/img4.png" alt="Campo"></div>
+                        <div class="carousel-slide"><img src="img/img5.png" alt="Equipo"></div>
+                    </div>
+                </div>
             </div>
         </section>
 
-
-        <!-- SECCIÓN DERECHA: Formulario interactivo de inicio de sesión -->
-        <section class="form-panel">
-            
-            <header class="form-header">
-                <div class="lock-icon"></div>
-                <h2>Bienvenido de nuevo</h2>
-                <p>Inicia sesión para continuar</p>
-            </header>
-
-            <form action="#" method="POST" class="login-form">
-                
-                <!-- Campo: Correo electrónico -->
-                <div class="input-group">
-                    <label for="email">Correo electrónico</label>
-                    <div class="input-wrapper">
-                        <span class="input-icon icon-mail"></span>
-                        <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+        <!-- SECCIÓN QUIÉNES SOMOS (CON CONTADORES) -->
+        <section id="about" class="about-section">
+            <div class="about-container">
+                <div class="about-content fade-in-element">
+                    <span class="about-badge">¿QUIÉNES SOMOS?</span>
+                    <h2>Tecnología diseñada por y para el sector agropecuario</h2>
+                    <p>Somos una plataforma digital nacida con la misión de transformar la administración del campo. Conectamos la labor diaria de productores, agrónomos y veterinarios en una sola WebApp intuitiva y potente.</p>
+                    <div class="about-stats">
+                        <div class="stat-card" data-target="0">
+                            <span class="stat-number">0</span><span class="stat-plus">+</span>
+                            <p>Animales Registrados</p>
+                        </div>
+                        <div class="stat-card" data-target="0">
+                            <span class="stat-number">0</span><span class="stat-plus">+</span>
+                            <p>Usuarios Activos</p>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Campo: Contraseña -->
-                <div class="input-group">
-                    <label for="password">Contraseña</label>
-                    <div class="input-wrapper">
-                        <span class="input-icon icon-lock"></span>
-                        <input type="password" id="password" name="password" placeholder="••••••••" required>
-                        <button type="button" class="toggle-password" aria-label="Mostrar contraseña"></button>
+                <div class="about-image-wrapper fade-in-element">
+                    <div class="interactive-circle-container">
+                        <div class="main-circle-card"><img src="img/portada.png" alt="Monitoreo" class="about-img-circle"></div>
                     </div>
                 </div>
-
-                <!-- Enlace de recuperación -->
-                <div class="form-actions">
-                    <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
-                </div>
-
-                <!-- Botón para enviar el formulario -->
-                <button type="submit" class="btn-submit">Iniciar sesión</button>
-                
-                <!-- Divisor decorativo -->
-                <div class="divider">
-                    <span>o</span>
-                </div>
-
-                <!-- Botón alternativo de inicio con Google -->
-                <button type="button" class="btn-google">
-                    <!-- Espacio listo para colocar el logo de Google en formato SVG o PNG cuando lo tengas -->
-                    <img src="#" alt="" class="google-logo"> 
-                    Continuar con Google
-                </button>
-
-            </form>
-
-            <!-- Pie del formulario para derivar a registro -->
-            <footer class="form-footer">
-                <p>¿No tienes una cuenta? <a href="#">Regístrate</a></p>
-            </footer>
-
+            </div>
         </section>
 
+        <!-- CARACTERÍSTICAS -->
+        <section id="features" class="features-section">
+            <div class="section-title">
+                <span class="sub">TODO LO QUE PUEDES HACER</span>
+                <h2>Una solución completa para tu operación</h2>
+            </div>
+            <div class="features-services-grid">
+                <article class="service-card"><div class="service-icon"></div><h3>Registro animal</h3><p>Ficha completa de cada animal.</p></article>
+                <article class="service-card"><div class="service-icon"></div><h3>Salud y tratamientos</h3><p>Control estricto de vacunas.</p></article>
+                <article class="service-card"><div class="service-icon"></div><h3>Reproducción</h3><p>Seguimiento de servicios.</p></article>
+                <article class="service-card"><div class="service-icon"></div><h3>Producción</h3><p>Registro de pesajes.</p></article>
+                <article class="service-card"><div class="service-icon"></div><h3>Genealogía</h3><p>Trazabilidad total.</p></article>
+                <article class="service-card"><div class="service-icon"></div><h3>Reportes</h3><p>Estadísticas automáticas.</p></article>
+            </div>
+        </section>
+
+        <!-- ALIADOS -->
+        <section class="partners-section">
+            <div class="partners-container">
+                <div class="partners-text">
+                    <h3>Nuestros Aliados</h3>
+                    <p>Trabajamos junto a quienes impulsan el campo.</p>
+                </div>
+                <div class="partners-logos">
+                    <img src="img/msd.png" alt="MSD" class="partner-logo">
+                    <img src="img/zoetis.png" alt="Zoetis" class="partner-logo">
+                    <img src="img/allflex.png" alt="Allflex" class="partner-logo">
+                    <img src="img/virbac.png" alt="Virbac" class="partner-logo">
+                    <img src="img/elanco.png" alt="Elanco" class="partner-logo">
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- PIE DE PÁGINA GLOBAL DE LA WEB -->
-    <footer class="main-footer">
+    <footer class="global-footer">
         <p>&copy; 2026 Registro Animal. Todos los derechos reservados.</p>
     </footer>
 
+    <script src="js/main.js"></script>
 </body>
 </html>
