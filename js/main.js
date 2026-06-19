@@ -1,37 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // --- 1. LÓGICA DE CONTADORES ---
-    function animateCounters() {
-        const counters = document.querySelectorAll(".stat-card");
-        
-        counters.forEach(counter => {
-            const numElement = counter.querySelector(".stat-number");
-            const target = parseInt(counter.getAttribute("data-target"), 10);
-            
-            if (target === 0) {
-                numElement.innerText = "0";
-                return;
-            }
+    // 1. INYECCIÓN DE ICONOS FLOTANTES
+    injectIcons();
 
-            let current = 0;
-            const increment = Math.ceil(target / 50);
-
-            const updateCount = () => {
-                current += increment;
-                if (current < target) {
-                    numElement.innerText = current.toLocaleString('en-US');
-                    setTimeout(updateCount, 20);
-                } else {
-                    numElement.innerText = target.toLocaleString('en-US');
-                }
-            };
-            updateCount();
-        });
-    }
-
-    // --- 2. LÓGICA DE SCROLL (Animaciones Fade-in y Contadores) ---
+    // 2. LÓGICA DE SCROLL (Animaciones Fade-in) 
     const fadeElements = document.querySelectorAll(".fade-in-element");
-    let countersAnimated = false; 
 
     function checkScroll() {
         const triggerBottom = (window.innerHeight / 5) * 4; 
@@ -41,12 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (elementTop < triggerBottom) {
                 element.classList.add("is-visible");
-
-                // Solo dispara contadores si llega a la sección "About"
-                if (element.classList.contains("about-content") && !countersAnimated) {
-                    countersAnimated = true; 
-                    animateCounters();
-                }
             }
         });
     }
@@ -71,9 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// Función externa que genera e inyecta los iconos flotantes
 function injectIcons() {
     const container = document.querySelector('.interactive-circle-container');
     
+    // Verificación de seguridad por si el contenedor no existe en alguna página
+    if (!container) return; 
+
     // Iconos en formato SVG
     const icons = [
         { 

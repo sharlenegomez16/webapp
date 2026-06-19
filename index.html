@@ -19,30 +19,45 @@
                     <li><a href="#" class="active">Inicio</a></li>
                     <li><a href="#about">¿Quiénes somos?</a></li>
                     <li><a href="#features">Características</a></li>
-                    <li><a href="#">Precios</a></li>
-                    <li><a href="#">Recursos</a></li>
                     <li><a href="#">Contacto</a></li>
                 </ul>
             </nav>
             <div class="nav-actions">
-                <a href="login.html" class="btn-nav-login">Iniciar sesión</a>
+                <a href="login.html" class="btn-nav-login">
+                    <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    Iniciar sesión
+                </a>
             </div>
         </div>
     </header>
 
     <main>
-        <!-- HERO CON CARRUSEL INTEGRADO -->
         <section class="hero-section">
             <div class="hero-container">
                 <div class="hero-content">
-                    <span class="badge">PLATAFORMA #1 EN GESTIÓN ANIMAL</span>
+                    <span class="badge">PLATAFORMA GESTIÓN ANIMAL</span>
                     <h1>Toda la información de tus animales, en <span class="green-text">un solo lugar</span></h1>
                     <p>La plataforma completa para registrar, gestionar y analizar toda la información de tu ganado de forma simple, segura y accesible desde cualquier dispositivo.</p>
+                    
+                    <div class="partners-hero-wrapper">
+                        <span class="partners-hero-title">Junto a quienes impulsan el campo:</span>
+                        <div class="partners-hero-circles">
+                            <div class="partner-circle"><img src="img/msd.png" alt="MSD"></div>
+                            <div class="partner-circle"><img src="img/zoetis.png" alt="Zoetis"></div>
+                            <div class="partner-circle"><img src="img/allflex.png" alt="Allflex"></div>
+                            <div class="partner-circle"><img src="img/virbac.png" alt="Virbac"></div>
+                            <div class="partner-circle"><img src="img/elanco.png" alt="Elanco"></div>
+                        </div>
+                    </div>
+
                     <div class="hero-buttons">
-                        <a href="login.html" class="btn-primary">Comenzar ahora &rarr;</a>
+                        <a href="login.html" class="btn-hero-start">
+                            Comenzar ahora
+                            <span class="btn-arrow">&rarr;</span>
+                        </a>
                     </div>
                 </div>
-                <!-- Carrusel -->
+                
                 <div class="hero-carousel">
                     <div class="carousel-track">
                         <div class="carousel-slide active"><img src="img/img1.png" alt="Gestión"></div>
@@ -55,64 +70,155 @@
             </div>
         </section>
 
-        <!-- SECCIÓN QUIÉNES SOMOS (CON CONTADORES) -->
         <section id="about" class="about-section">
             <div class="about-container">
                 <div class="about-content fade-in-element">
                     <span class="about-badge">¿QUIÉNES SOMOS?</span>
-                    <h2>Tecnología diseñada por y para el sector agropecuario</h2>
-                    <p>Somos una plataforma digital nacida con la misión de transformar la administración del campo. Conectamos la labor diaria de productores, agrónomos y veterinarios en una sola WebApp intuitiva y potente.</p>
-                    <div class="about-stats">
-                        <div class="stat-card" data-target="0">
-                            <span class="stat-number">0</span><span class="stat-plus">+</span>
-                            <p>Animales Registrados</p>
-                        </div>
-                        <div class="stat-card" data-target="0">
-                            <span class="stat-number">0</span><span class="stat-plus">+</span>
-                            <p>Usuarios Activos</p>
-                        </div>
-                    </div>
+                    <h2>Optimización y control diario para tu producción pecuaria</h2>
+                    <p>Somos una herramienta digital creada exclusivamente para el control ganadero y pecuario. Facilitamos el registro individual de tus animales (ya sean bovinos, equinos u ovinos), permitiéndote gestionar su árbol genealógico completo y controlar detalladamente su descendencia de hijos y nietos. Además, podrás ingresar y monitorear eventos clave de cada animal, como el seguimiento de embarazos, registros de partos, historial de cirugías y tratamientos clínicos de forma simple y en un solo lugar.</p>
                 </div>
                 <div class="about-image-wrapper fade-in-element">
                     <div class="interactive-circle-container">
-                        <div class="main-circle-card"><img src="img/portada.png" alt="Monitoreo" class="about-img-circle"></div>
+                        <div class="main-circle-card">
+                            <img src="img/portada.png" alt="Monitoreo Ganadero" class="about-img-circle">
+                        </div>
+                        <div class="floating-badge-circle">
+                            <div class="pulse-dot"></div>
+                            <span>Monitoreo 24/7</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CARACTERÍSTICAS -->
-        <section id="features" class="features-section">
-            <div class="section-title">
-                <span class="sub">TODO LO QUE PUEDES HACER</span>
-                <h2>Una solución completa para tu operación</h2>
-            </div>
-            <div class="features-services-grid">
-                <article class="service-card"><div class="service-icon"></div><h3>Registro animal</h3><p>Ficha completa de cada animal.</p></article>
-                <article class="service-card"><div class="service-icon"></div><h3>Salud y tratamientos</h3><p>Control estricto de vacunas.</p></article>
-                <article class="service-card"><div class="service-icon"></div><h3>Reproducción</h3><p>Seguimiento de servicios.</p></article>
-                <article class="service-card"><div class="service-icon"></div><h3>Producción</h3><p>Registro de pesajes.</p></article>
-                <article class="service-card"><div class="service-icon"></div><h3>Genealogía</h3><p>Trazabilidad total.</p></article>
-                <article class="service-card"><div class="service-icon"></div><h3>Reportes</h3><p>Estadísticas automáticas.</p></article>
-            </div>
-        </section>
+        <!-- ==========================================================================
+   SECCIÓN DE CARACTERÍSTICAS (Grid Optimizado)
+   ========================================================================== -->
+<section class="features-section fade-in-element">
+    <div class="section-title">
+        <span class="sub">TODO LO QUE PUEDES HACER</span>
+        <h2>Una solución completa para tu operación</h2>
+        <p class="section-subtitle">Herramientas diseñadas para facilitar cada proceso de tu ganadería y tomar decisiones basadas en información real.</p>
+    </div>
 
-        <!-- ALIADOS -->
-        <section class="partners-section">
-            <div class="partners-container">
-                <div class="partners-text">
-                    <h3>Nuestros Aliados</h3>
-                    <p>Trabajamos junto a quienes impulsan el campo.</p>
-                </div>
-                <div class="partners-logos">
-                    <img src="img/msd.png" alt="MSD" class="partner-logo">
-                    <img src="img/zoetis.png" alt="Zoetis" class="partner-logo">
-                    <img src="img/allflex.png" alt="Allflex" class="partner-logo">
-                    <img src="img/virbac.png" alt="Virbac" class="partner-logo">
-                    <img src="img/elanco.png" alt="Elanco" class="partner-logo">
-                </div>
+    <div class="features-services-grid">
+        <div class="service-card">
+            <div class="service-image-container">
+                <svg viewBox="0 0 100 100" class="feature-svg">
+                    <circle cx="50" cy="50" r="40" fill="#f0fdf4" opacity="0.6"/>
+                    <rect x="25" y="30" width="45" height="35" rx="4" fill="#e2e8f0" stroke="#2c4c37" stroke-width="1.5"/>
+                    <line x1="32" y1="40" x2="50" y2="40" stroke="#2c4c37" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="32" y1="48" x2="45" y2="48" stroke="#2c4c37" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="32" y1="56" x2="55" y2="56" stroke="#2c4c37" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M 50,38 C 55,38 58,42 58,48 C 58,56 54,64 50,64 C 46,64 42,56 42,48 C 42,42 45,38 50,38 Z" fill="#2c4c37"/>
+                    <path d="M 38,42 C 40,44 42,46 44,47 M 62,42 C 60,44 58,46 56,47" stroke="#2c4c37" stroke-width="2" stroke-linecap="round"/> 
+                    <circle cx="68" cy="62" r="10" fill="#84cc16"/>
+                    <path d="M 64,62 L 67,65 L 73,59" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </div>
-        </section>
+            <h3>Registro animal</h3>
+            <p>Ficha completa de cada animal con información detallada, historial y documentos.</p>
+            <span class="card-arrow">&gt;</span>
+        </div>
+
+        <div class="service-card">
+            <div class="service-image-container">
+                <svg viewBox="0 0 100 100" class="feature-svg">
+                    <circle cx="50" cy="50" r="40" fill="#f0fdf4" opacity="0.6"/>
+                    <rect x="42" y="42" width="22" height="28" rx="3" fill="#cbd5e1" stroke="#2c4c37" stroke-width="1.5"/>
+                    <rect x="46" y="37" width="14" height="5" fill="#94a3b8" stroke="#2c4c37" stroke-width="1.5"/>
+                    <g transform="rotate(-30 40 40)">
+                        <rect x="25" y="20" width="10" height="30" rx="1" fill="#ffffff" fill-opacity="0.8" stroke="#2c4c37" stroke-width="1.5"/>
+                        <line x1="25" y1="27" x2="35" y2="27" stroke="#2c4c37" stroke-width="1"/>
+                        <line x1="25" y1="35" x2="35" y2="35" stroke="#2c4c37" stroke-width="1"/>
+                        <line x1="25" y1="43" x2="35" y2="43" stroke="#2c4c37" stroke-width="1"/>
+                        <rect x="28" y="10" width="4" height="10" fill="#2c4c37"/>
+                        <line x1="30" y1="50" x2="30" y2="62" stroke="#2c4c37" stroke-width="1.5"/>
+                    </g>
+                    <path d="M 62,50 C 62,50 62,64 72,68 C 82,64 82,50 82,50 L 72,46 Z" fill="#2c4c37"/>
+                    <path d="M 72,52 L 72,62 M 67,57 L 77,57" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <h3>Salud y tratamientos</h3>
+            <p>Control estricto de vacunas, medicamentos y tratamientos veterinarios.</p>
+            <span class="card-arrow">&gt;</span>
+        </div>
+
+        <div class="service-card">
+            <div class="service-image-container">
+                <svg viewBox="0 0 100 100" class="feature-svg">
+                    <circle cx="50" cy="50" r="40" fill="#f0fdf4" opacity="0.6"/>
+                    <circle cx="45" cy="50" r="22" fill="none" stroke="#2c4c37" stroke-width="1.5" stroke-dasharray="4 2"/>
+                    <path d="M 32,56 C 32,46 42,42 50,46 C 56,44 60,48 60,54 L 62,58 L 28,58 Z" fill="#2c4c37"/>
+                    <path d="M 24,66 C 24,60 30,58 35,60 C 39,59 42,61 42,65 L 43,68 L 22,68 Z" fill="#84cc16"/>
+                    <path d="M 68,34 Q 74,44 68,54 T 68,74" fill="none" stroke="#2c4c37" stroke-width="1.5"/>
+                    <path d="M 76,34 Q 70,44 76,54 T 76,74" fill="none" stroke="#84cc16" stroke-width="1.5"/>
+                    <line x1="69" y1="40" x2="75" y2="38" stroke="#2c4c37" stroke-width="1"/>
+                    <line x1="71" y1="49" x2="73" y2="49" stroke="#2c4c37" stroke-width="1"/>
+                    <line x1="69" y1="59" x2="75" y2="57" stroke="#2c4c37" stroke-width="1"/>
+                </svg>
+            </div>
+            <h3>Reproducción</h3>
+            <p>Seguimiento de servicios, inseminaciones, gestaciones y partos.</p>
+            <span class="card-arrow">&gt;</span>
+        </div>
+
+        <div class="service-card">
+            <div class="service-image-container">
+                <svg viewBox="0 0 100 100" class="feature-svg">
+                    <circle cx="50" cy="50" r="40" fill="#f0fdf4" opacity="0.6"/>
+                    <rect x="20" y="66" width="54" height="6" rx="2" fill="#2c4c37"/>
+                    <rect x="25" y="42" width="12" height="24" fill="#cbd5e1" stroke="#2c4c37" stroke-width="1.5"/>
+                    <circle cx="31" cy="34" r="10" fill="#ffffff" stroke="#2c4c37" stroke-width="2"/>
+                    <line x1="31" y1="34" x2="35" y2="30" stroke="#84cc16" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M 45,60 C 45,52 52,50 62,50 C 68,50 72,54 72,60 Z" fill="#2c4c37"/>
+                </svg>
+            </div>
+            <h3>Producción</h3>
+            <p>Registro de pesajes, ganancias de peso y ganado diario.</p>
+            <span class="card-arrow">&gt;</span>
+        </div>
+
+        <div class="service-card">
+            <div class="service-image-container">
+                <svg viewBox="0 0 100 100" class="feature-svg">
+                    <circle cx="50" cy="50" r="40" fill="#f0fdf4" opacity="0.6"/>
+                    <line x1="50" y1="35" x2="50" y2="65" stroke="#2c4c37" stroke-width="2"/>
+                    <line x1="28" y1="50" x2="72" y2="50" stroke="#2c4c37" stroke-width="2"/>
+                    <circle cx="50" cy="32" r="8" fill="#2c4c37"/>
+                    <path d="M 47,32 L 50,29 L 53,32" fill="none" stroke="#ffffff" stroke-width="1.2"/>
+                    <circle cx="28" cy="50" r="7" fill="#84cc16"/>
+                    <circle cx="72" cy="50" r="7" fill="#84cc16"/>
+                    <circle cx="50" cy="68" r="7" fill="#84cc16"/>
+                </svg>
+            </div>
+            <h3>Genealogía</h3>
+            <p>Trazabilidad completa del origen y linaje de tu ganado.</p>
+            <span class="card-arrow">&gt;</span>
+        </div>
+
+        <div class="service-card">
+            <div class="service-image-container">
+                <svg viewBox="0 0 100 100" class="feature-svg">
+                    <circle cx="50" cy="50" r="40" fill="#f0fdf4" opacity="0.6"/>
+                    <rect x="22" y="26" width="46" height="34" rx="3" fill="#ffffff" stroke="#2c4c37" stroke-width="2"/>
+                    <rect x="22" y="26" width="46" height="8" fill="#2c4c37"/>
+                    <path d="M 40,60 L 36,68 L 54,68 L 50,60 Z" fill="#2c4c37"/>
+                    <rect x="28" y="46" width="5" height="10" fill="#84cc16"/>
+                    <rect x="36" y="40" width="5" height="16" fill="#2c4c37"/>
+                    <rect x="44" y="44" width="5" height="12" fill="#84cc16"/>
+                    <rect x="58" y="40" width="20" height="32" rx="3" fill="#2c4c37"/>
+                    <circle cx="68" cy="52" r="6" fill="none" stroke="#ffffff" stroke-width="2"/>
+                    <path d="M 68,52 L 68,46 A 6,6 0 0,1 74,52 Z" fill="#84cc16"/>
+                    <circle cx="68" cy="67" r="1.5" fill="#ffffff"/>
+                </svg>
+            </div>
+            <h3>Reportes</h3>
+            <p>Estadísticas automáticas y reportes claros para mejorar tus decisiones.</p>
+            <span class="card-arrow">&gt;</span>
+        </div>
+    </div>
+</section>
     </main>
 
     <footer class="global-footer">

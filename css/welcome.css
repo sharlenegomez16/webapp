@@ -10,7 +10,7 @@
 
 :root {
     --primary-green: #2c4c37;
-    --light-green: #84cc16;
+    --light-green: #84cc16; /* El verde lima exacto de tu imagen */
     --text-dark: #1f2937;
     --text-muted: #4b5563;
     --bg-light: #f9fafb;
@@ -89,20 +89,37 @@ body {
     padding-bottom: 4px;
 }
 
+/* Botón de iniciar sesión - 100% Verde Lima de tu imagen */
 .btn-nav-login {
     text-decoration: none;
-    color: var(--primary-green);
-    border: 1px solid var(--primary-green);
+    color: var(--text-dark);
+    border: 2px solid var(--light-green);
     padding: 8px 18px;
-    border-radius: 6px;
+    border-radius: 50px;
     font-size: 14px;
     font-weight: 600;
-    transition: background-color 0.2s, color 0.2s;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
 }
 
 .btn-nav-login:hover {
-    background-color: var(--primary-green);
+    background-color: var(--light-green);
     color: #ffffff;
+    box-shadow: 0 4px 15px rgba(132, 204, 22, 0.3);
+}
+
+/* Icono de perfil SVG */
+.profile-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+
+.btn-nav-login:hover .profile-icon {
+    transform: scale(1.15);
 }
 
 /* ==========================================================================
@@ -159,6 +176,41 @@ body {
     gap: 15px;
 }
 
+/* Botón de comenzar animado - Degradado de Verde Oscuro a Verde Lima */
+.btn-hero-start {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--primary-green) 0%, #15803d 50%, var(--light-green) 100%);
+    background-size: 200% auto;
+    padding: 16px 35px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2), 0 0 0 0 rgba(132, 204, 22, 0.4);
+    transition: all 0.4s ease;
+    animation: buttonPulse 2s infinite, gradientMove 4s ease infinite;
+}
+
+/* Flecha del botón */
+.btn-arrow {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.btn-hero-start:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(34, 197, 94, 0.4), 0 0 0 10px rgba(132, 204, 22, 0);
+    background-position: right center; /* Desplaza el degradado hacia el verde lima brillante */
+}
+
+.btn-hero-start:hover .btn-arrow {
+    transform: translateX(6px);
+}
+
 .hero-carousel {
     flex: 1;
     height: 450px;
@@ -193,7 +245,66 @@ body {
 }
 
 /* ==========================================================================
-   4. SECCIÓN ¿QUIÉNES SOMOS? (CIRCULAR CON ICONOS FLOTANTES INYECTADOS)
+   4. APARTADO DE ALIADOS EN EL HERO
+   ========================================================================== */
+.partners-hero-wrapper {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.partners-hero-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    text-align: left;
+}
+
+.partners-hero-circles {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.partner-circle {
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff;
+    border: 2px solid var(--light-green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, border-color 0.2s;
+}
+
+.partner-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.8;
+    transition: filter 0.2s, opacity 0.2s;
+}
+
+.partner-circle:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-green);
+}
+
+.partner-circle:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* ==========================================================================
+   5. APARTADO DE QUIÉNES SOMOS
    ========================================================================== */
 .about-section {
     padding: 100px 20px;
@@ -234,40 +345,6 @@ body {
     color: var(--text-muted);
     line-height: 1.7;
     margin-bottom: 20px;
-}
-
-.about-stats {
-    display: flex;
-    gap: 20px;
-    margin-top: 35px;
-}
-
-.stat-card {
-    background: #f0fdf4;
-    border-left: 4px solid #16a34a;
-    padding: 20px;
-    border-radius: 8px;
-    flex: 1;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-}
-
-.stat-number {
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--primary-green);
-}
-
-.stat-plus {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--light-green);
-}
-
-.stat-card p {
-    font-size: 14px;
-    margin-bottom: 0;
-    margin-top: 5px;
-    font-weight: 500;
 }
 
 .about-image-wrapper {
@@ -348,198 +425,169 @@ body {
     100% { transform: scale(3); opacity: 0; }
 }
 
-/* Configuración General de Iconos SVG Inyectados */
-.mini-float-icon {
-    position: absolute;
-    width: 55px;
-    height: 55px;
-    background-color: #ffffff;
-    border: 2px solid #e5e7eb;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    z-index: 5;
-    transition: transform 0.3s ease, background-color 0.3s;
-}
-
-.mini-float-icon svg {
-    color: var(--primary-green);
-    width: 24px;
-    height: 24px;
-    transition: color 0.3s;
-}
-
-.mini-float-icon:hover {
-    background-color: #f0fdf4;
-    border-color: var(--light-green);
-    transform: scale(1.15);
-    cursor: pointer;
-}
-
-.mini-float-icon:hover svg {
-    color: #16a34a;
-}
-
-/* Posiciones de Iconos Individuales */
-.icon-top-right {
-    top: 15px;
-    right: 15px;
-    animation: floatUpDown 4s infinite ease-in-out;
-}
-
-.icon-bottom-right {
-    bottom: 40px;
-    right: -10px;
-    animation: floatLeftRight 4.5s infinite ease-in-out;
-}
-
-.icon-top-left {
-    top: 40px;
-    left: -10px;
-    animation: floatLeftRight 3.8s infinite ease-in-out;
-}
-
-.icon-bottom-left {
-    bottom: 15px;
-    left: 15px;
-    animation: floatUpDown 4.2s infinite ease-in-out;
-}
-
-/* Animaciones de Orbita Flotante */
-@keyframes floatUpDown {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
-}
-
-@keyframes floatLeftRight {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(10px); }
-}
-
 /* ==========================================================================
-   5. SECCIÓN DE CARACTERÍSTICAS (GRID)
+   6. SECCIÓN DE CARACTERÍSTICAS (GRID PREMIUM CON SVGs ILUSTRADOS)
    ========================================================================== */
 .features-section {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 80px 20px;
+    padding: 100px 20px;
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 }
 
 .section-title .sub {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
-    color: #16a34a;
-    letter-spacing: 1px;
+    color: var(--light-green); /* Verde lima brillante */
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
 }
 
 .section-title h2 {
-    font-size: 28px;
-    color: var(--text-dark);
-    margin-top: 5px;
+    font-size: 38px;
+    font-weight: 800;
+    color: #0f172a; /* Azul oscuro premium */
+    margin-top: 10px;
+    margin-bottom: 15px;
 }
 
+.section-subtitle {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Grid de 3 columnas */
 .features-services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
 }
 
+/* Tarjeta minimalista con bordes redondeados suaves */
 .service-card {
     background-color: #ffffff;
-    border: 1px solid #e5e7eb;
-    padding: 30px;
-    border-radius: 8px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #f1f5f9;
+    border-radius: 16px;
+    padding: 40px 30px;
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
 }
 
-.service-icon {
-    width: 45px;
-    height: 45px;
-    background-color: #f0fdf4;
-    border-radius: 8px;
-    margin-bottom: 20px;
+/* Contenedor circular para albergar los SVGs complejos */
+.service-image-container {
+    width: 110px;
+    height: 110px;
+    background-color: #ffffff; /* Fondo blanco inicial */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(44, 76, 55, 0.04);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: smoothIconFloat 4s ease-in-out infinite;
 }
 
+/* Tiempos desfasados para que la flotación de las tarjetas sea asíncrona */
+.service-card:nth-child(2) .service-image-container { animation-delay: 0.5s; }
+.service-card:nth-child(3) .service-image-container { animation-delay: 1s; }
+.service-card:nth-child(4) .service-image-container { animation-delay: 1.5s; }
+.service-card:nth-child(5) .service-image-container { animation-delay: 2s; }
+.service-card:nth-child(6) .service-image-container { animation-delay: 2.5s; }
+
+/* Escala del SVG dentro de la burbuja */
+.feature-svg {
+    width: 90px;
+    height: 90px;
+    transition: all 0.4s ease;
+}
+
+/* Título de la característica con subrayado verde fijo */
 .service-card h3 {
-    font-size: 18px;
-    color: var(--text-dark);
-    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 15px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.service-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 3px;
+    background-color: var(--light-green);
+    border-radius: 2px;
 }
 
 .service-card p {
     font-size: 14px;
     color: var(--text-muted);
-    line-height: 1.5;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Empuja la flecha hacia abajo uniformemente */
 }
 
-/* ==========================================================================
-   6. SECCIÓN DE SOCIOS Y ALIADOS (HORIZONTAL FLEX)
-   ========================================================================== */
-.partners-section {
-    padding: 40px 20px;
-    background-color: #f9fafb;
-    border-top: 1px solid #e5e7eb;
+/* Flecha de enlace abajo a la derecha */
+.card-arrow {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    color: var(--light-green);
+    font-weight: bold;
+    font-size: 18px;
+    transition: transform 0.2s ease;
 }
 
-.partners-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
+.service-card:hover .card-arrow {
+    transform: translateX(4px);
 }
 
-.partners-text {
-    flex: 1;
-    max-width: 300px;
+/* INTERACCIÓN AL PASAR EL MOUSE (Efecto Inversión) */
+.service-card:hover .service-image-container {
+    background-color: #f0fdf4; /* Tinte verde muy claro */
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 12px 24px rgba(44, 76, 55, 0.08);
 }
 
-.partners-text h3 {
-    margin: 0 0 5px 0;
-    color: var(--primary-green);
-    font-size: 1.1rem;
+.service-card:hover .feature-svg {
+    transform: scale(1.03);
 }
 
-.partners-text p {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    line-height: 1.4;
-    margin: 0;
+/* ANIMACIÓN DE FLOATING INFINITO */
+@keyframes smoothIconFloat {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0px); }
 }
 
-.partners-logos {
-    flex: 2;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 25px;
-    filter: grayscale(100%);
-    opacity: 0.7;
-    transition: 0.3s ease;
+/* RESPONSIVE DESIGN DE LA SECCIÓN */
+@media (max-width: 992px) {
+    .features-services-grid { grid-template-columns: repeat(2, 1fr); }
+    .section-title h2 { font-size: 32px; }
 }
 
-.partners-logos:hover {
-    filter: grayscale(0%);
-    opacity: 1;
-}
-
-.partner-logo {
-    max-height: 35px;
-    width: auto;
-    object-fit: contain;
+@media (max-width: 640px) {
+    .features-services-grid { grid-template-columns: 1fr; }
 }
 
 /* ==========================================================================
@@ -578,7 +626,7 @@ body {
         max-width: 100%;
     }
 
-    .hero-buttons, .about-stats {
+    .hero-buttons {
         justify-content: center;
     }
 
@@ -604,18 +652,6 @@ body {
     .features-services-grid {
         grid-template-columns: 1fr;
     }
-
-    .partners-container {
-        flex-direction: column;
-        text-align: center;
-    }
-    .partners-text {
-        max-width: 100%;
-    }
-    .partners-logos {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
 }
 
 @media (max-width: 480px) {
@@ -623,8 +659,101 @@ body {
         width: 280px;
         height: 280px;
     }
-    .mini-float-icon {
-        width: 45px;
-        height: 45px;
+}
+
+/* ==========================================================================
+   9. KEYFRAMES INTERACTIVAS DE LOS BOTONES (SOLO VERDE)
+   ========================================================================== */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes buttonPulse {
+    0% {
+        box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2), 0 0 0 0 rgba(132, 204, 22, 0.4);
+    }
+    70% {
+        box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2), 0 0 0 15px rgba(132, 204, 22, 0);
+    }
+    100% {
+        box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2), 0 0 0 0 rgba(132, 204, 22, 0);
+    }
+}
+
+/* ==========================================================================
+   ESTILOS PARA LOS ICONOS FLOTANTES (Asociados al JS)
+   ========================================================================== */
+.mini-float-icon {
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    background-color: #ffffff;
+    border: 2px solid var(--light-green); /* El verde lima exacto */
+    color: var(--primary-green);         /* Icono en verde oscuro para contraste */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(44, 76, 55, 0.12);
+    z-index: 15;
+    padding: 10px;
+    transition: transform 0.3s ease, border-color 0.3s, color 0.3s;
+}
+
+/* Cambio de color interactivo al pasar el mouse */
+.mini-float-icon:hover {
+    border-color: var(--primary-green);
+    color: var(--light-green);
+    transform: scale(1.1) !important; /* Mantiene el tamaño interactivo sobre la animación */
+    cursor: pointer;
+}
+
+/* Posicionamiento estratégico alrededor del óvalo central */
+.icon-top-left {
+    top: 12%;
+    left: -5%;
+    animation: floatingIcon 4s ease-in-out infinite;
+}
+
+.icon-top-right {
+    top: 20%;
+    right: -5%;
+    animation: floatingIcon 4.5s ease-in-out infinite 0.7s; /* Desfase de tiempo */
+}
+
+.icon-bottom-left {
+    bottom: 25%;
+    left: -8%;
+    animation: floatingIcon 5s ease-in-out infinite 1.2s; /* Desfase de tiempo */
+}
+
+.icon-bottom-right {
+    bottom: 18%;
+    right: -4%;
+    animation: floatingIcon 4.2s ease-in-out infinite 0.3s; /* Desfase de tiempo */
+}
+
+/* Responsive: Ajuste para pantallas pequeñas para que no se desborden */
+@media (max-width: 480px) {
+    .icon-top-left { left: 2%; }
+    .icon-top-right { right: 2%; }
+    .icon-bottom-left { left: -2%; }
+    .icon-bottom-right { right: -2%; }
+}
+
+/* ==========================================================================
+   ANIMACIÓN DE LEVITACIÓN SUAVE
+   ========================================================================== */
+@keyframes floatingIcon {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px); /* Sube suavemente */
+    }
+    100% {
+        transform: translateY(0px);
     }
 }
