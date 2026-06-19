@@ -123,125 +123,229 @@ body {
 }
 
 /* ==========================================================================
-   3. SECCIÓN PRINCIPAL (HERO SECTION & CARRUSEL)
+   3. SECCIÓN HERO Y CARRUSEL ULTRA-RESPONSIVO
    ========================================================================== */
 .hero-section {
-    position: relative;
-    background-color: var(--bg-light);
+    width: 100%;
+    padding: 120px 20px 80px 20px; /* Espacio para que el header no tape el contenido */
+    background-color: #f8fafc; /* Fondo suave */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
-    padding: 80px 20px;
 }
 
 .hero-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Ancho máximo de ordenadores */
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* Texto un poco más ancho que la imagen */
     gap: 40px;
+    align-items: center;
 }
 
+/* --- BLOQUE DE TEXTO --- */
 .hero-content {
-    flex: 1;
-    max-width: 600px;
-    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .badge {
-    display: inline-block;
-    background-color: #e8f5e9;
-    color: var(--primary-green);
-    font-size: 11px;
-    font-weight: 700;
+    align-self: flex-start;
     padding: 6px 12px;
-    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    background-color: #f0fdf4;
+    color: #15803d;
+    border-radius: 100px;
     margin-bottom: 20px;
+    letter-spacing: 0.5px;
 }
 
 .hero-content h1 {
-    font-size: 44px;
+    font-size: clamp(32px, 4vw, 48px); /* Tamaño fluido que se encoge en celular y crece en PC */
     line-height: 1.2;
-    color: var(--text-dark);
+    color: #0f172a;
+    font-weight: 800;
     margin-bottom: 20px;
 }
 
 .hero-content p {
-    font-size: 16px;
+    font-size: clamp(15px, 1.5vw, 17px); /* Texto legible en cualquier pantalla */
+    color: #475569;
     line-height: 1.6;
-    color: var(--text-muted);
     margin-bottom: 30px;
 }
 
-.hero-buttons {
-    display: flex;
-    gap: 15px;
+/*  MÓDULO DEL CARRUSEL */
+.hero-carousel {
+    position: relative;
+    width: 100%;
+    /* Relación de aspecto 4:3 para que mantenga proporción exacta en cualquier pantalla */
+    aspect-ratio: 4 / 3; 
+    max-width: 540px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.1);
 }
 
-/* Botón de comenzar animado - Degradado de Verde Oscuro a Verde Lima */
-.btn-hero-start {
-    display: inline-flex;
+.carousel-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Evita que las imágenes se distorsionen o estiren */
+    object-position: center;
+}
+
+//* ==========================================================================
+   REPARACIÓN DE GRID PARA EL HERO CONTENT (Laptop y PC)
+   ========================================================================== */
+.hero-container {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr; /* Da más espacio al contenido de la izquierda */
+    gap: 40px;
     align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    overflow: visible; /* Evita que se recorten los efectos de pulso */
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea todo limpiamente a la izquierda en laptop */
+    justify-content: center;
+    width: 100%;
+    z-index: 10; /* Fuerza a que el texto y el botón floten sobre cualquier fondo o carrusel */
+}
+
+/* Envoltura de los aliados para que no empujen el botón hacia abajo infinitamente */
+.partners-hero-wrapper {
+    margin-bottom: 25px; 
+    width: 100%;
+}
+
+/* El contenedor del botón */
+.hero-buttons {
+    margin-top: 15px;
+    display: block;
+    width: auto;
+    z-index: 20;
+}
+
+/* ==========================================================================
+   ADAPTACIÓN PARA CELULARES (Donde ya te funcionaba)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .hero-container {
+        grid-template-columns: 1fr; /* Pasa a una sola columna vertical */
+        text-align: center;
+        gap: 30px;
+    }
+
+    .hero-content {
+        align-items: center; /* Centra el botón y textos en el celular */
+    }
+}
+    
+   /* ==========================================================================
+   TU DISEÑO ORIGINAL RECUPERADO (Con esteroides para forzar caché)
+   ========================================================================== */
+.btn-hero-start {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center;
     gap: 10px;
-    text-decoration: none;
-    color: #ffffff;
-    background: linear-gradient(135deg, var(--primary-green) 0%, #15803d 50%, var(--light-green) 100%);
-    background-size: 200% auto;
-    padding: 16px 35px;
-    border-radius: 50px;
-    font-size: 16px;
-    font-weight: 700;
+    text-decoration: none !important; /* Elimina la línea de abajo obligatoriamente */
+    color: #ffffff !important; /* Fuerza el texto blanco original */
+    
+    /* Tu degradado original de 3 tonos móviles */
+    background: linear-gradient(135deg, var(--primary-green) 0%, #15803d 50%, var(--light-green) 100%) !important;
+    background-size: 200% auto !important;
+    
+    padding: 16px 35px !important;
+    border-radius: 50px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
     letter-spacing: 0.5px;
+    
     box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2), 0 0 0 0 rgba(132, 204, 22, 0.4);
-    transition: all 0.4s ease;
+    transition: all 0.4s ease !important;
+    
+    /* Asegúrate de que estas animaciones existan al final de tu CSS */
     animation: buttonPulse 2s infinite, gradientMove 4s ease infinite;
+    cursor: pointer;
+    border: none !important;
 }
 
 /* Flecha del botón */
 .btn-arrow {
     font-size: 18px;
     transition: transform 0.3s ease;
+    color: #ffffff !important;
+    display: inline-block;
 }
 
 .btn-hero-start:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 30px rgba(34, 197, 94, 0.4), 0 0 0 10px rgba(132, 204, 22, 0);
-    background-position: right center; /* Desplaza el degradado hacia el verde lima brillante */
+    transform: translateY(-4px) !important;
+    box-shadow: 0 15px 30px rgba(34, 197, 94, 0.4), 0 0 0 10px rgba(132, 204, 22, 0) !important;
+    background-position: right center !important; /* Desplaza el degradado hacia el verde lima brillante */
+    text-decoration: none !important;
 }
 
 .btn-hero-start:hover .btn-arrow {
     transform: translateX(6px);
 }
 
-.hero-carousel {
-    flex: 1;
-    height: 450px;
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden; 
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+/* ==========================================================================
+   ASEGÚRATE DE TENER ESTOS KEYFRAMES PARA QUE NO SE QUEDE ESTÁTICO
+   ========================================================================== */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-.carousel-track {
-    width: 100%;
-    height: 100%;
-    position: relative;
+@keyframes buttonPulse {
+    0% { box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2), 0 0 0 0 rgba(132, 204, 22, 0.4); }
+    70% { box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2), 0 0 0 10px rgba(132, 204, 22, 0); }
+    100% { box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2), 0 0 0 0 rgba(132, 204, 22, 0); }
 }
 
-.carousel-slide {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+/* ==========================================================================
+   ADAPTACIÓN RESPONSIVA PARA MÓVILES
+   ========================================================================== */
+@media (max-width: 480px) {
+    .btn-hero-start {
+        width: 100% !important; /* Se expande full-width en celulares */
+        justify-content: center;
+    }
 }
-
-.carousel-slide.active {
-    opacity: 1;
-}
-
-.carousel-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 /* ==========================================================================
@@ -755,5 +859,612 @@ body {
     }
     100% {
         transform: translateY(0px);
+    }
+}
+
+/* ==========================================================================
+   FOOTER PREMIUM - VERSIÓN LIMPIA Y COMPACTA (CORREGIDA)
+   ========================================================================== */
+.footer-dark-wrapper {
+    background-color: #f8fafc;
+    padding-top: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Tarjeta CTA Superior */
+.cta-dark-card {
+    max-width: 1200px;
+    margin: 0 auto 40px auto;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 25px 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    box-sizing: border-box;
+}
+
+.cta-dark-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 75%;
+}
+
+.cta-dark-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #f0fdf4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    flex-shrink: 0;
+}
+
+.leaf-icon {
+    width: 100%;
+    height: 100%;
+}
+
+.cta-dark-text h2 {
+    font-size: 22px;
+    color: #0f172a;
+    margin: 0 0 4px 0;
+    font-weight: 700;
+}
+
+.cta-dark-text p {
+    color: #475569;
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.btn-dark-demo {
+    background-color: #15803d;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-dark-demo:hover {
+    background-color: #166534;
+}
+
+/* Cuerpo del Footer Negro/Verde Bosque */
+.main-dark-footer {
+    background-color: #091512;
+    color: #94a3b8;
+    padding: 50px 0 0 0;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.footer-dark-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px 20px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr 1.2fr;
+    gap: 40px;
+    position: relative;
+    z-index: 5;
+    box-sizing: border-box;
+}
+
+/* Marca y Descripción */
+.logo-text-dark {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.logo-icon-dark {
+    width: 14px;
+    height: 14px;
+    background-color: #22c55e;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.brand-dark-desc {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 15px 0;
+    color: #a7f3d0;
+    opacity: 0.7;
+}
+
+/* Redes Sociales */
+.social-icons-row {
+    display: flex;
+    gap: 12px;
+}
+
+.social-circle {
+    width: 36px;
+    height: 36px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-circle svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.2s ease;
+}
+
+.social-circle:hover {
+    background-color: #22c55e;
+    border-color: #22c55e;
+    transform: translateY(-3px);
+}
+
+/* Listas de Enlaces */
+.footer-dark-links h3 {
+    color: #22c55e;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0 0 20px 0;
+}
+
+.footer-dark-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-dark-links ul li {
+    margin-bottom: 12px;
+}
+
+.footer-dark-links ul li a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.link-arrow {
+    color: #22c55e;
+    opacity: 0;
+    font-size: 12px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.footer-dark-links ul li a:hover {
+    color: #22c55e;
+}
+
+.footer-dark-links ul li a:hover .link-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+}
+
+/* Columna Contacto */
+.contact-dark-col ul li {
+    color: #cbd5e1;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.footer-svg-icon {
+    width: 18px;
+    height: 18px;
+    stroke: #22c55e;
+    flex-shrink: 0;
+}
+
+.green-bright-text, .secure-green {
+    color: #22c55e;
+}
+
+/* Barra Inferior del Copyright */
+.footer-dark-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px 25px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.footer-dark-bottom p, .security-badge-dark p {
+    font-size: 13px;
+    color: #cbd5e1;
+    margin: 0;
+    position: relative;
+    z-index: 10;
+}
+
+.security-badge-dark {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Silueta Paisaje Compacta */
+.field-silhouette-deco {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px; /* Reducido a 80px para que no estorbe */
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: cover;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.12;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'><path d='M0,90 Q150,70 350,95 T750,85 T1200,100 L1200,120 L0,120 Z' fill='%2315803d'/><path d='M0,100 Q250,85 500,105 T1000,95 T1200,110 L1200,120 L0,120 Z' fill='%23166534'/><circle cx='850' cy='85' r='12' fill='%23115e59'/><circle cx='865' cy='80' r='15' fill='%23115e59'/><circle cx='880' cy='88' r='10' fill='%23115e59'/><rect x='862' y='95' width='4' height='15' fill='%230f172a'/><g transform='translate(950, 82) scale(0.4)' fill='%23115e59'><path d='M 20 10 L 35 10 Q 38 10 38 13 L 38 22 Q 35 25 30 25 L 10 25 Q 5 25 5 20 L 5 15 Q 5 10 20 10 Z'/><rect x='8' y='24' width='3' height='10'/><rect x='14' y='24' width='3' height='10'/><rect x='28' y='24' width='3' height='10'/><rect x='34' y='24' width='3' height='10'/><path d='M 37 12 L 45 15 L 43 20 L 37 17 Z'/></g><g transform='translate(1020, 85) scale(0.35)' fill='%23115e59'><path d='M 20 10 L 35 10 Q 38 10 38 13 L 38 22 Q 35 25 30 25 L 10 25 Q 5 25 5 20 L 5 15 Q 5 10 20 10 Z'/><rect x='8' y='24' width='3' height='10'/><rect x='14' y='24' width='3' height='10'/><rect x='28' y='24' width='3' height='10'/><rect x='34' y='24' width='3' height='10'/><path d='M 37 12 L 45 15 L 43 20 L 37 17 Z'/></g></svg>");
+}
+
+/* ==========================================================================
+   RESPONSIVE MÓVIL REPARADO
+   ========================================================================== */
+@media (max-width: 768px) {
+    .cta-dark-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        margin: 0 15px 30px 15px;
+        padding: 20px;
+    }
+    .cta-dark-left {
+        flex-direction: column;
+        max-width: 100%;
+    }
+    .footer-dark-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 35px;
+        padding-left: 25px;  /* Agrega espacio seguro a los lados */
+        padding-right: 25px; /* Agrega espacio seguro a los lados */
+    }
+    .brand-dark-desc {
+        padding: 0 10px; /* Evita que el texto roce los bordes del celular */
+        margin-bottom: 25px;
+    }
+    .social-icons-row {
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    .footer-dark-links ul li {
+        margin-bottom: 18px; /* Más separación vertical para facilitar el toque táctil */
+    }
+    .footer-dark-links ul li a {
+        justify-content: center;
+        gap: 10px;
+        padding: 4px 0;
+    }
+    .link-arrow {
+        display: none;
+    }
+    .contact-dark-col ul li {
+        justify-content: center;
+    }
+    .footer-dark-bottom {
+        flex-direction: column-reverse;
+        gap: 15px;
+        padding-top: 40px;
+    }
+
+}
+
+/* ==========================================================================
+   ESTILOS BASE Y RESPONSIVOS PARA LA PANTALLA DE INICIAR SESIÓN (LOGIN)
+   ========================================================================== */
+
+/* 1. Contenedor principal que envuelve los dos paneles (Computadora) */
+.login-container {
+    display: flex;
+    min-height: 90vh;
+    max-width: 1100px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+}
+
+/* Panel Izquierdo Informativo (Computadora) */
+.info-panel {
+    flex: 1;
+    background-color: var(--primary-green);
+    background-image: linear-gradient(rgba(44, 76, 55, 0.85), rgba(44, 76, 55, 0.95)), url('../img/portada.png');
+    background-size: cover;
+    background-position: center;
+    padding: 50px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-container h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.logo-container span {
+    color: var(--light-green);
+}
+
+.slogan {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #e2e8f0;
+    margin-top: 30px;
+    margin-bottom: auto;
+}
+
+.features-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.feature-item h2 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--light-green);
+    margin-bottom: 4px;
+}
+
+.feature-item p {
+    font-size: 13px;
+    color: #cbd5e1;
+}
+
+/* Panel Derecho del Formulario (Computadora) */
+.form-panel {
+    flex: 1;
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
+}
+
+.form-header {
+    margin-bottom: 35px;
+}
+
+.form-header h2 {
+    font-size: 26px;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.form-header p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Inputs Premium estilizados */
+.input-wrapper input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.input-wrapper input:focus {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 3px rgba(44, 76, 55, 0.1);
+}
+
+.form-actions {
+    text-align: right;
+}
+
+.forgot-password {
+    font-size: 13px;
+    color: var(--primary-green);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Botones */
+.btn-submit {
+    background-color: var(--primary-green);
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
+    background-color: #1e3526;
+}
+
+.divider {
+    text-align: center;
+    position: relative;
+    margin: 10px 0;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #e2e8f0;
+    z-index: 1;
+}
+
+.divider span {
+    background-color: #ffffff;
+    padding: 0 15px;
+    color: var(--text-muted);
+    font-size: 14px;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-google {
+    background-color: #ffffff;
+    color: var(--text-dark);
+    border: 1px solid #cbd5e1;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-google:hover {
+    background-color: #f8fafc;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.form-footer a {
+    color: var(--primary-green);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo simple para el footer general oculto en login */
+.main-footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   2. REACOMODO EXCLUSIVO PARA CELULARES (RESPONSIVE)
+   ========================================================================== */
+@media (max-width: 850px) {
+    .login-container {
+        flex-direction: column;
+        margin: 0;
+        border-radius: 0;
+        border: none;
+        min-height: 100vh;
+        box-shadow: none;
+    }
+
+    /* Ocultamos el panel de beneficios izquierdo para que no estorbe en celular */
+    .info-panel {
+        display: none !important;
+    }
+
+    /* El formulario toma el 100% de la pantalla del celular de forma limpia */
+    .form-panel {
+        width: 100%;
+        padding: 40px 24px;
+    }
+
+    .form-header h2 {
+        font-size: 24px;
+    }
+
+    /* Inputs más grandes para que sean fáciles de tocar con el dedo */
+    .input-wrapper input {
+        padding: 15px;
+        font-size: 16px; /* Evita zoom automático molesto en celulares */
+    }
+
+    .btn-submit, .btn-google {
+        padding: 15px;
+        font-size: 16px;
     }
 }

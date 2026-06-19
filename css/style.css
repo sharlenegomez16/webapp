@@ -365,3 +365,81 @@ body {
     color: #9ca3af;
     text-align: center;
 }
+
+/* ==========================================================================
+   6. OPTIMIZACIÓN ULTRA-RESPONSIVA PARA CELULARES
+   ========================================================================== */
+/* ==========================================================================
+   6. OPTIMIZACIÓN ULTRA-RESPONSIVA PARA CELULARES (CON IMAGEN RESCATADA)
+   ========================================================================== */
+@media (max-width: 850px) {
+    body {
+        padding: 0;
+        background-color: #ffffff;
+        justify-content: flex-start;
+    }
+
+    /* Cambiamos a dirección columna para que la imagen quede ARRIBA y el formulario ABAJO */
+    .login-container {
+        flex-direction: column;
+        height: auto; 
+        max-width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+    }
+
+    /* 📸 Rescatamos el panel izquierdo para el celular */
+    .info-panel {
+        display: flex !important; /* ¡Ya no se oculta! */
+        width: 100%;
+        height: 260px; /* Le damos una altura fija controlada para que no tape todo el celular */
+        padding: 25px; /* Reducimos el padding interno */
+        border-radius: 0;
+        justify-content: center; /* Centramos el contenido verticalmente */
+        align-items: center;
+        background-position: center 30%; /* Ajusta el encuadre de los animales */
+    }
+
+    /* Ocultamos los textos largos y los beneficios inferiores solo en celular para dejar espacio limpio a la imagen */
+    .slogan, .features-grid {
+        display: none !important;
+    }
+
+    /* El logo principal lo hacemos un poco más compacto en móviles */
+    .logo-container {
+        margin-top: 0;
+    }
+    
+    .logo-container h1 {
+        font-size: 22px;
+    }
+
+    /* El formulario toma el espacio de abajo limpiamente */
+    .form-panel {
+        width: 100%;
+        padding: 35px 24px;
+        box-sizing: border-box;
+    }
+
+    .form-header {
+        margin-bottom: 25px;
+        text-align: center;
+    }
+
+    .form-header h2 {
+        font-size: 22px;
+    }
+
+    /* Inputs cómodos para los dedos */
+    .input-wrapper input {
+        padding: 14px 16px 14px 42px;
+        font-size: 16px; 
+    }
+
+    .btn-submit, .btn-google {
+        padding: 15px;
+        font-size: 16px;
+    }
+
+}
