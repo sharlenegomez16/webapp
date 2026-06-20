@@ -72,3 +72,32 @@ function injectIcons() {
         container.appendChild(div);
     });
 }
+
+// ==========================================================================
+// CONTROLADOR GLOBAL DE MODO OSCURO (REGISTRO ANIMAL)
+// ==========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. COMPROBACIÓN INMEDIATA (Afecta a todas las páginas que tengan este JS)
+    const currentTheme = localStorage.getItem('theme');
+    
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+
+    // 2. BUSCAR EL BOTÓN INTERRUPTOR (Solo estará en el Index)
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    
+    // Si la página actual no tiene el botón (como el Login), el script se detiene aquí limpiamente
+    if (!themeToggleBtn) return;
+
+    // 3. ESCUCHAR EL CLIC (Solo en la página donde exista el botón)
+    themeToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        
+        let theme = 'light';
+        if (document.body.classList.contains('dark-mode')) {
+            theme = 'dark';
+        }
+        localStorage.setItem('theme', theme);
+    });
+});

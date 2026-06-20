@@ -1,4 +1,30 @@
 /* ==========================================================================
+   VARIABLES GLOBALES (MODO CLARO POR DEFECTO)
+   Alineadas con welcome.css para que ambas páginas se vean consistentes
+   ========================================================================== */
+:root {
+    --login-bg: #f8fafc;
+    --form-bg: #ffffff;
+    --input-border: #d1d5db;
+    --text-main: #1f2937;
+    --text-muted: #4b5563;
+
+    --primary-green: #2c4c37;
+    --light-green: #84cc16;
+}
+
+/* ==========================================================================
+   VARIABLES MODO OSCURO (idénticas a welcome.css)
+   ========================================================================== */
+body.dark-mode {
+    --login-bg: #0b1311;
+    --form-bg: #14201c;
+    --input-border: #2c3e3a;
+    --text-main: #ffffff;
+    --text-muted: #9ca3af;
+}
+
+/* ==========================================================================
    1. RESETEO Y CONFIGURACIÓN GLOBAL
    ========================================================================== */
 * {
@@ -9,18 +35,38 @@
 }
 
 body {
-    background-color: #f4f6f8;
+    background-color: var(--login-bg);
+    color: var(--text-main);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* 2. CONTENEDOR PRINCIPAL (TARJETA)*/
+/* Foco visible para accesibilidad (igual que en welcome.css) */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--light-green);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ==========================================================================
+   2. CONTENEDOR PRINCIPAL (TARJETA)
+   ========================================================================== */
 .login-container {
-    background-color: #ffffff;
+    background-color: var(--form-bg);
     width: 100%;
     max-width: 1050px;
     height: 720px;
@@ -28,6 +74,12 @@ body {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode .login-container {
+    background-color: var(--login-bg); /* mismo negro casi puro que el index, no el tono de tarjeta */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 /* ==========================================================================
@@ -36,58 +88,30 @@ body {
 .info-panel {
     flex: 1; /* Toma el 50% del espacio */
     position: relative;
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: #ffffff;
-    
-    /* ESPACIO PARA TU IMAGEN DE FONDO */
-    /* Cuando tengas tu imagen, descomenta la línea de abajo y pon su ruta */
-    /* background-image: linear-gradient(rgba(44, 76, 55, 0.85), rgba(27, 48, 34, 0.9)), url('tu-imagen-de-animales.jpg'); */
-    background-color: #2c4c37; /* Color verde oscuro temporal por si no hay imagen */
-    background-size: cover;
-    background-position: center;
-}
-
-/* Capa oscura superpuesta si tu imagen es muy clara (opcional si usas el gradient de arriba) */
-/* ==========================================================================
-   3. SECCIÓN IZQUIERDA: PANEL INFORMATIVO (RUTA DE IMAGEN CORREGIDA)
-   ========================================================================== */
-/* ==========================================================================
-   3. SECCIÓN IZQUIERDA: DEGRADADO MÁS CLARO PARA SELECCIONAR LA PORTADA
-   ========================================================================== */
-.info-panel {
-    flex: 1;
-    position: relative;
     padding: 60px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     color: #ffffff;
-    
-    /* 📸 DEGRADADO AJUSTADO (Más transparente para que la imagen respire) */
-    background-image: 
+
+    /* Degradado de marca (mismo verde --primary-green en rgb) sobre la foto de portada */
+    background-image:
         linear-gradient(135deg, rgba(36, 61, 44, 0.65), rgba(44, 76, 55, 0.45)),
-        url('../img/portada.png');
-        
+        url('../img/portada.webp');
     background-size: cover;
     background-position: center 20%;
     background-repeat: no-repeat;
     border-radius: 12px 0 0 12px;
-    
-    /* Añadimos un text-shadow sutil para garantizar que las letras blancas 
-       se sigan leyendo perfectamente aunque el fondo sea más claro */
+
+    /* Text-shadow sutil para que el texto blanco se siga leyendo bien */
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
-/* El resto del código de abajo se queda exactamente igual */
-.logo-container, .slogan, .features-grid {
-    position: relative;
-    z-index: 10;
-}
-/* Forzamos a que todo el contenido del panel quede por encima del filtro de fondo */
-.logo-container, .slogan, .features-grid {
+/* El panel de la foto mantiene siempre su propia paleta de marca,
+   independiente del modo claro/oscuro del sitio */
+.logo-container,
+.slogan,
+.features-grid {
     position: relative;
     z-index: 2;
 }
@@ -102,9 +126,8 @@ body {
 .logo-icon {
     width: 45px;
     height: 45px;
-    border: 2px solid #84cc16; /* Color verde claro */
+    border: 2px solid var(--light-green);
     border-radius: 50%;
-    /* Aquí irá tu icono de las cabezas de animales */
 }
 
 .logo-container h1 {
@@ -113,7 +136,7 @@ body {
 }
 
 .logo-container h1 span {
-    color: #a3e635; /* Resaltado verde claro para 'Animal' */
+    color: var(--light-green); /* Mismo verde lima que "Animal" en welcome.css */
 }
 
 /* Eslogan del medio */
@@ -155,7 +178,6 @@ body {
     border-radius: 4px;
 }
 
-
 /* ==========================================================================
    4. SECCIÓN DERECHA: FORMULARIO
    ========================================================================== */
@@ -165,7 +187,12 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #ffffff;
+    background-color: var(--form-bg);
+    transition: background-color 0.3s ease;
+}
+
+body.dark-mode .form-panel {
+    background-color: var(--login-bg); /* mismo negro casi puro que el index */
 }
 
 /* Encabezado del formulario */
@@ -181,18 +208,31 @@ body {
     color: #2e7d32;
     border-radius: 50%;
     margin: 0 auto 15px;
-    /* Espacio para el icono de candado verde */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.lock-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+body.dark-mode .lock-icon {
+    background-color: rgba(132, 204, 22, 0.15);
+    color: var(--light-green);
 }
 
 .form-header h2 {
     font-size: 24px;
-    color: #1f2937;
+    color: var(--text-main);
     margin-bottom: 6px;
 }
 
 .form-header p {
     font-size: 14px;
-    color: #6b7280;
+    color: var(--text-muted);
 }
 
 /* Campos de entrada (Inputs) */
@@ -210,8 +250,8 @@ body {
 
 .input-group label {
     font-size: 13px;
-    font-weight: 600;
-    color: #374151;
+    font-weight: 500;
+    color: var(--text-main);
 }
 
 .input-wrapper {
@@ -223,25 +263,34 @@ body {
 .input-wrapper input {
     width: 100%;
     padding: 12px 16px 12px 42px; /* Espacio extra a la izquierda para el icono */
-    border: 1px solid #d1d5db;
+    border: 1px solid var(--input-border);
     border-radius: 6px;
     font-size: 14px;
-    color: #1f2937;
+    color: var(--text-main);
+    background-color: var(--form-bg);
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+
+.input-wrapper input::placeholder {
+    color: var(--text-muted);
 }
 
 .input-wrapper input:focus {
-    border-color: #2c4c37;
+    border-color: var(--primary-green);
     box-shadow: 0 0 0 3px rgba(44, 76, 55, 0.1);
+}
+
+body.dark-mode .input-wrapper input:focus {
+    border-color: var(--light-green);
+    box-shadow: 0 0 0 3px rgba(132, 204, 22, 0.15);
 }
 
 /* Iconos dentro de los inputs */
 .input-icon {
     position: absolute;
     left: 14px;
-    color: #9ca3af;
-    /* Aquí centrarás tus iconos de sobre/candado */
+    color: var(--text-muted);
 }
 
 .toggle-password {
@@ -250,7 +299,7 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    color: #6b7280;
+    color: var(--text-muted);
 }
 
 /* Enlace Olvidaste tu contraseña */
@@ -260,9 +309,13 @@ body {
 
 .forgot-password {
     font-size: 13px;
-    color: #2c4c37;
+    color: var(--primary-green);
     text-decoration: none;
     font-weight: 500;
+}
+
+body.dark-mode .forgot-password {
+    color: var(--light-green);
 }
 
 .forgot-password:hover {
@@ -271,20 +324,29 @@ body {
 
 /* Botones */
 .btn-submit {
-    background-color: #346345; /* Verde del botón de iniciar sesión */
+    background-color: var(--primary-green);
     color: #ffffff;
     border: none;
-    padding: 14px;
+    padding: 11px;
     border-radius: 6px;
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, color 0.2s;
     margin-top: 10px;
 }
 
 .btn-submit:hover {
-    background-color: #284c35;
+    background-color: #1f3a2a;
+}
+
+body.dark-mode .btn-submit {
+    background-color: var(--light-green);
+    color: #0b1311;
+}
+
+body.dark-mode .btn-submit:hover {
+    background-color: #9ee62a;
 }
 
 /* Separador 'o' */
@@ -298,24 +360,24 @@ body {
     content: '';
     position: absolute;
     top: 50%; left: 0; width: 100%; height: 1px;
-    background-color: #e5e7eb;
+    background-color: var(--input-border);
     z-index: 1;
 }
 
 .divider span {
-    background-color: #ffffff;
+    background-color: var(--form-bg);
     padding: 0 15px;
     font-size: 13px;
-    color: #9ca3af;
+    color: var(--text-muted);
     position: relative;
     z-index: 2;
 }
 
 /* Botón de Google */
 .btn-google {
-    background-color: #ffffff;
-    color: #374151;
-    border: 1px solid #d1d5db;
+    background-color: var(--form-bg);
+    color: var(--text-main);
+    border: 1px solid var(--input-border);
     padding: 12px;
     border-radius: 6px;
     font-size: 14px;
@@ -325,11 +387,15 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .btn-google:hover {
-    background-color: #f9fafb;
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+body.dark-mode .btn-google:hover {
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .google-logo {
@@ -342,19 +408,22 @@ body {
     text-align: center;
     margin-top: 30px;
     font-size: 14px;
-    color: #6b7280;
+    color: var(--text-muted);
 }
 
 .form-footer a {
-    color: #346345;
+    color: var(--primary-green);
     text-decoration: none;
     font-weight: 600;
+}
+
+body.dark-mode .form-footer a {
+    color: var(--light-green);
 }
 
 .form-footer a:hover {
     text-decoration: underline;
 }
-
 
 /* ==========================================================================
    5. PIE DE PÁGINA GLOBAL (COPYRIGHT)
@@ -362,64 +431,57 @@ body {
 .main-footer {
     margin-top: 25px;
     font-size: 12px;
-    color: #9ca3af;
+    color: var(--text-muted);
     text-align: center;
 }
 
 /* ==========================================================================
    6. OPTIMIZACIÓN ULTRA-RESPONSIVA PARA CELULARES
    ========================================================================== */
-/* ==========================================================================
-   6. OPTIMIZACIÓN ULTRA-RESPONSIVA PARA CELULARES (CON IMAGEN RESCATADA)
-   ========================================================================== */
 @media (max-width: 850px) {
     body {
         padding: 0;
-        background-color: #ffffff;
+        background-color: var(--form-bg);
         justify-content: flex-start;
     }
 
-    /* Cambiamos a dirección columna para que la imagen quede ARRIBA y el formulario ABAJO */
+    /* Columna: imagen arriba, formulario abajo */
     .login-container {
         flex-direction: column;
-        height: auto; 
+        height: auto;
         max-width: 100%;
         border-radius: 0;
         box-shadow: none;
         border: none;
     }
 
-    /* 📸 Rescatamos el panel izquierdo para el celular */
     .info-panel {
-        display: flex !important; /* ¡Ya no se oculta! */
+        display: flex !important;
         width: 100%;
-        height: 260px; /* Le damos una altura fija controlada para que no tape todo el celular */
-        padding: 25px; /* Reducimos el padding interno */
+        height: 260px; /* Altura fija controlada para no tapar todo el celular */
+        padding: 25px;
         border-radius: 0;
-        justify-content: center; /* Centramos el contenido verticalmente */
+        justify-content: center;
         align-items: center;
-        background-position: center 30%; /* Ajusta el encuadre de los animales */
+        background-position: center 30%;
     }
 
-    /* Ocultamos los textos largos y los beneficios inferiores solo en celular para dejar espacio limpio a la imagen */
+    /* Ocultamos textos largos y beneficios para dejar espacio limpio a la imagen */
     .slogan, .features-grid {
         display: none !important;
     }
 
-    /* El logo principal lo hacemos un poco más compacto en móviles */
     .logo-container {
         margin-top: 0;
     }
-    
+
     .logo-container h1 {
         font-size: 22px;
     }
 
-    /* El formulario toma el espacio de abajo limpiamente */
     .form-panel {
         width: 100%;
         padding: 35px 24px;
-        box-sizing: border-box;
     }
 
     .form-header {
@@ -434,12 +496,11 @@ body {
     /* Inputs cómodos para los dedos */
     .input-wrapper input {
         padding: 14px 16px 14px 42px;
-        font-size: 16px; 
-    }
-
-    .btn-submit, .btn-google {
-        padding: 15px;
         font-size: 16px;
     }
 
+    .btn-submit, .btn-google {
+        padding: 13px;
+        font-size: 15px;
+    }
 }

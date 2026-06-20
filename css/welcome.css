@@ -1,5 +1,43 @@
 /* ==========================================================================
-   1. RESETEO Y VARIABLES GLOBALES
+   VARIABLES GLOBALES (MODO CLARO POR DEFECTO)
+   ========================================================================== */
+:root {
+    /* Fondos */
+    --bg-principal: #ffffff;
+    --bg-suave: #f8fafc;
+    --card-bg: #ffffff;
+    --header-bg: #ffffff;
+    --border-color: #e5e7eb;
+
+    /* Textos */
+    --text-color: #1f2937;
+    --text-dark: #1f2937;
+    --text-muted: #4b5563;
+
+    /* Colores de Marca */
+    --primary-green: #2c4c37;
+    --light-green: #84cc16; /* Verde lima exacto */
+    --bg-light: #f9fafb;
+}
+
+/* ==========================================================================
+   VARIABLES DE CONTROL PARA MODO OSCURO
+   ========================================================================== */
+body.dark-mode {
+    --bg-principal: #0b1311;
+    --bg-suave: #070d0c;
+    --card-bg: #14201c;
+    --header-bg: #14201c;
+    --border-color: #2c3e3a;
+
+    /* Textos claros */
+    --text-color: #f3f4f6;
+    --text-dark: #ffffff;
+    --text-muted: #9ca3af;
+}
+
+/* ==========================================================================
+   1. RESETEO
    ========================================================================== */
 * {
     margin: 0;
@@ -8,35 +46,49 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-:root {
-    --primary-green: #2c4c37;
-    --light-green: #84cc16; /* El verde lima exacto de tu imagen */
-    --text-dark: #1f2937;
-    --text-muted: #4b5563;
-    --bg-light: #f9fafb;
-}
-
 html {
     scroll-behavior: smooth;
 }
 
 body {
-    background-color: #ffffff;
+    background-color: var(--bg-principal);
     color: var(--text-dark);
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ==========================================================================
+   ACCESIBILIDAD: FOCO VISIBLE Y RESPETO A REDUCED MOTION
+   ========================================================================== */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--light-green);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 /* ==========================================================================
    2. BARRA DE NAVEGACIÓN (NAVBAR)
    ========================================================================== */
 .main-header {
-    background-color: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
-
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -127,28 +179,35 @@ body {
    ========================================================================== */
 .hero-section {
     width: 100%;
-    padding: 120px 20px 80px 20px; /* Espacio para que el header no tape el contenido */
-    background-color: #f8fafc; /* Fondo suave */
+    padding: 120px 20px 80px 20px;
+    background-color: var(--bg-suave);
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    transition: background-color 0.3s ease;
 }
 
+/* Grid principal del hero (combina texto + carrusel) */
 .hero-container {
-    width: 100%;
-    max-width: 1200px; /* Ancho máximo de ordenadores */
     display: grid;
-    grid-template-columns: 1.2fr 1fr; /* Texto un poco más ancho que la imagen */
+    grid-template-columns: 1.2fr 0.8fr; /* Da más espacio al contenido de la izquierda */
     gap: 40px;
     align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    overflow: visible; /* Evita que se recorten los efectos de pulso */
 }
 
-/* --- BLOQUE DE TEXTO --- */
 .hero-content {
     display: flex;
     flex-direction: column;
+    align-items: flex-start; /* Alinea todo limpiamente a la izquierda en laptop */
     justify-content: center;
+    width: 100%;
+    z-index: 10; /* Fuerza a que el texto y el botón floten sobre cualquier fondo o carrusel */
 }
 
 .badge {
@@ -172,18 +231,17 @@ body {
 }
 
 .hero-content p {
-    font-size: clamp(15px, 1.5vw, 17px); /* Texto legible en cualquier pantalla */
-    color: #475569;
+    font-size: clamp(15px, 1.5vw, 17px);
+    color: var(--text-muted);
     line-height: 1.6;
     margin-bottom: 30px;
 }
 
-/*  MÓDULO DEL CARRUSEL */
+/* MÓDULO DEL CARRUSEL */
 .hero-carousel {
     position: relative;
     width: 100%;
-    /* Relación de aspecto 4:3 para que mantenga proporción exacta en cualquier pantalla */
-    aspect-ratio: 4 / 3; 
+    aspect-ratio: 4 / 3; /* Relación de aspecto 4:3 para que mantenga proporción exacta */
     max-width: 540px;
     margin: 0 auto;
     overflow: hidden;
@@ -220,34 +278,13 @@ body {
     object-position: center;
 }
 
-//* ==========================================================================
-   REPARACIÓN DE GRID PARA EL HERO CONTENT (Laptop y PC)
-   ========================================================================== */
-.hero-container {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr; /* Da más espacio al contenido de la izquierda */
-    gap: 40px;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    overflow: visible; /* Evita que se recorten los efectos de pulso */
-}
-
-.hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Alinea todo limpiamente a la izquierda en laptop */
-    justify-content: center;
-    width: 100%;
-    z-index: 10; /* Fuerza a que el texto y el botón floten sobre cualquier fondo o carrusel */
-}
-
 /* Envoltura de los aliados para que no empujen el botón hacia abajo infinitamente */
 .partners-hero-wrapper {
-    margin-bottom: 25px; 
+    margin-bottom: 25px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 /* El contenedor del botón */
@@ -271,33 +308,51 @@ body {
     .hero-content {
         align-items: center; /* Centra el botón y textos en el celular */
     }
+
+    .hero-section {
+        padding: 40px 20px 60px 20px; /* el padding de 120px era para la barra de escritorio, no la compacta de móvil */
+    }
+
+    /* Aliados en una sola línea recta, sin envolver a una segunda fila */
+    .partners-hero-circles {
+        flex-wrap: nowrap;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        overflow-x: auto; /* respaldo por si la pantalla es muy angosta */
+        padding-bottom: 4px;
+    }
+
+    .partner-circle {
+        width: 42px;
+        height: 42px;
+        flex-shrink: 0; /* evita que se aplasten o se envuelvan */
+    }
 }
-    
-   /* ==========================================================================
-   TU DISEÑO ORIGINAL RECUPERADO (Con esteroides para forzar caché)
+
+/* ==========================================================================
+   BOTÓN PRINCIPAL DEL HERO
    ========================================================================== */
 .btn-hero-start {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center;
     gap: 10px;
-    text-decoration: none !important; /* Elimina la línea de abajo obligatoriamente */
-    color: #ffffff !important; /* Fuerza el texto blanco original */
-    
-    /* Tu degradado original de 3 tonos móviles */
+    text-decoration: none !important;
+    color: #ffffff !important;
+
     background: linear-gradient(135deg, var(--primary-green) 0%, #15803d 50%, var(--light-green) 100%) !important;
     background-size: 200% auto !important;
-    
+
     padding: 16px 35px !important;
     border-radius: 50px !important;
     font-size: 16px !important;
     font-weight: 700 !important;
     letter-spacing: 0.5px;
-    
+
     box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2), 0 0 0 0 rgba(132, 204, 22, 0.4);
     transition: all 0.4s ease !important;
-    
-    /* Asegúrate de que estas animaciones existan al final de tu CSS */
+
     animation: buttonPulse 2s infinite, gradientMove 4s ease infinite;
     cursor: pointer;
     border: none !important;
@@ -314,7 +369,7 @@ body {
 .btn-hero-start:hover {
     transform: translateY(-4px) !important;
     box-shadow: 0 15px 30px rgba(34, 197, 94, 0.4), 0 0 0 10px rgba(132, 204, 22, 0) !important;
-    background-position: right center !important; /* Desplaza el degradado hacia el verde lima brillante */
+    background-position: right center !important;
     text-decoration: none !important;
 }
 
@@ -322,9 +377,7 @@ body {
     transform: translateX(6px);
 }
 
-/* ==========================================================================
-   ASEGÚRATE DE TENER ESTOS KEYFRAMES PARA QUE NO SE QUEDE ESTÁTICO
-   ========================================================================== */
+/* Keyframes del botón hero (definidos una sola vez) */
 @keyframes gradientMove {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -333,31 +386,20 @@ body {
 
 @keyframes buttonPulse {
     0% { box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2), 0 0 0 0 rgba(132, 204, 22, 0.4); }
-    70% { box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2), 0 0 0 10px rgba(132, 204, 22, 0); }
+    70% { box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2), 0 0 0 15px rgba(132, 204, 22, 0); }
     100% { box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2), 0 0 0 0 rgba(132, 204, 22, 0); }
 }
 
-/* ==========================================================================
-   ADAPTACIÓN RESPONSIVA PARA MÓVILES
-   ========================================================================== */
 @media (max-width: 480px) {
     .btn-hero-start {
-        width: 100% !important; /* Se expande full-width en celulares */
+        width: 100% !important;
         justify-content: center;
     }
-}
 }
 
 /* ==========================================================================
    4. APARTADO DE ALIADOS EN EL HERO
    ========================================================================== */
-.partners-hero-wrapper {
-    margin-bottom: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
 .partners-hero-title {
     font-size: 13px;
     font-weight: 600;
@@ -412,8 +454,9 @@ body {
    ========================================================================== */
 .about-section {
     padding: 100px 20px;
-    background-color: #ffffff;
+    background-color: var(--bg-principal);
     overflow: hidden;
+    transition: background-color 0.3s ease;
 }
 
 .about-container {
@@ -429,11 +472,12 @@ body {
 }
 
 .about-badge {
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 800;
     color: #16a34a;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
     display: inline-block;
 }
 
@@ -450,7 +494,6 @@ body {
     line-height: 1.7;
     margin-bottom: 20px;
 }
-
 .about-image-wrapper {
     flex: 1;
     display: flex;
@@ -504,6 +547,14 @@ body {
     z-index: 10;
     font-size: 13px;
     font-weight: 600;
+    color: #1f2937; /* Fijo en modo claro: el fondo blanco no cambia, así que el texto tampoco debe heredar el color claro del modo oscuro */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .floating-badge-circle {
+    background: rgba(20, 32, 28, 0.65); /* vidrio esmerilado oscuro, se funde con la foto */
+    color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 .pulse-dot {
@@ -546,7 +597,7 @@ body {
 .section-title .sub {
     font-size: 14px;
     font-weight: 700;
-    color: var(--light-green); /* Verde lima brillante */
+    color: var(--light-green);
     letter-spacing: 1.5px;
     text-transform: uppercase;
 }
@@ -554,7 +605,7 @@ body {
 .section-title h2 {
     font-size: 38px;
     font-weight: 800;
-    color: #0f172a; /* Azul oscuro premium */
+    color: #0f172a;
     margin-top: 10px;
     margin-bottom: 15px;
 }
@@ -567,24 +618,16 @@ body {
     line-height: 1.6;
 }
 
-/* Grid de 3 columnas */
 .features-services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
 }
 
-/* Tarjeta minimalista con bordes redondeados suaves */
 .service-card {
-    background-color: #ffffff;
-    border: 1px solid #f1f5f9;
-    border-radius: 16px;
-    padding: 40px 30px;
-    position: relative;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
 }
 
 .service-card:hover {
@@ -592,11 +635,10 @@ body {
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
 }
 
-/* Contenedor circular para albergar los SVGs complejos */
 .service-image-container {
     width: 110px;
     height: 110px;
-    background-color: #ffffff; /* Fondo blanco inicial */
+    background-color: #ffffff;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -608,21 +650,18 @@ body {
     animation: smoothIconFloat 4s ease-in-out infinite;
 }
 
-/* Tiempos desfasados para que la flotación de las tarjetas sea asíncrona */
 .service-card:nth-child(2) .service-image-container { animation-delay: 0.5s; }
 .service-card:nth-child(3) .service-image-container { animation-delay: 1s; }
 .service-card:nth-child(4) .service-image-container { animation-delay: 1.5s; }
 .service-card:nth-child(5) .service-image-container { animation-delay: 2s; }
 .service-card:nth-child(6) .service-image-container { animation-delay: 2.5s; }
 
-/* Escala del SVG dentro de la burbuja */
 .feature-svg {
     width: 90px;
     height: 90px;
     transition: all 0.4s ease;
 }
 
-/* Título de la característica con subrayado verde fijo */
 .service-card h3 {
     font-size: 20px;
     font-weight: 700;
@@ -648,10 +687,9 @@ body {
     color: var(--text-muted);
     line-height: 1.6;
     margin-bottom: 20px;
-    flex-grow: 1; /* Empuja la flecha hacia abajo uniformemente */
+    flex-grow: 1;
 }
 
-/* Flecha de enlace abajo a la derecha */
 .card-arrow {
     position: absolute;
     bottom: 30px;
@@ -666,9 +704,8 @@ body {
     transform: translateX(4px);
 }
 
-/* INTERACCIÓN AL PASAR EL MOUSE (Efecto Inversión) */
 .service-card:hover .service-image-container {
-    background-color: #f0fdf4; /* Tinte verde muy claro */
+    background-color: #f0fdf4;
     transform: scale(1.06) translateY(-2px);
     box-shadow: 0 12px 24px rgba(44, 76, 55, 0.08);
 }
@@ -677,14 +714,12 @@ body {
     transform: scale(1.03);
 }
 
-/* ANIMACIÓN DE FLOATING INFINITO */
 @keyframes smoothIconFloat {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-6px); }
     100% { transform: translateY(0px); }
 }
 
-/* RESPONSIVE DESIGN DE LA SECCIÓN */
 @media (max-width: 992px) {
     .features-services-grid { grid-template-columns: repeat(2, 1fr); }
     .section-title h2 { font-size: 32px; }
@@ -725,7 +760,7 @@ body {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .hero-content, .about-content {
         max-width: 100%;
     }
@@ -736,7 +771,8 @@ body {
 
     .hero-carousel {
         width: 100%;
-        height: 350px;
+        /* Sin height fijo: dejamos que aspect-ratio: 4/3 (definido arriba)
+           calcule la altura proporcional, así no se recorta de más en móvil */
     }
 
     .features-services-grid {
@@ -745,16 +781,42 @@ body {
 }
 
 @media (max-width: 768px) {
-    .nav-menu {
-        display: none;
-    }
-    
     .hero-content h1, .about-content h2 {
         font-size: 32px;
     }
 
     .features-services-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Menú móvil: lo mostramos en fila, envolviendo si es necesario */
+    .nav-container {
+        flex-direction: column;
+        padding: 10px 16px;
+        gap: 8px;
+    }
+
+    .nav-menu {
+        display: flex !important;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .nav-menu a {
+        font-size: 13px;
+        padding: 4px 8px;
+    }
+
+    .btn-nav-login {
+        width: auto;
+        text-align: center;
+        margin-top: 2px;
+        padding: 6px 16px;
+        font-size: 13px;
     }
 }
 
@@ -766,27 +828,6 @@ body {
 }
 
 /* ==========================================================================
-   9. KEYFRAMES INTERACTIVAS DE LOS BOTONES (SOLO VERDE)
-   ========================================================================== */
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes buttonPulse {
-    0% {
-        box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2), 0 0 0 0 rgba(132, 204, 22, 0.4);
-    }
-    70% {
-        box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2), 0 0 0 15px rgba(132, 204, 22, 0);
-    }
-    100% {
-        box-shadow: 0 10px 20px rgba(132, 204, 22, 0.2), 0 0 0 0 rgba(132, 204, 22, 0);
-    }
-}
-
-/* ==========================================================================
    ESTILOS PARA LOS ICONOS FLOTANTES (Asociados al JS)
    ========================================================================== */
 .mini-float-icon {
@@ -794,8 +835,8 @@ body {
     width: 46px;
     height: 46px;
     background-color: #ffffff;
-    border: 2px solid var(--light-green); /* El verde lima exacto */
-    color: var(--primary-green);         /* Icono en verde oscuro para contraste */
+    border: 2px solid var(--light-green);
+    color: var(--primary-green);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -806,15 +847,13 @@ body {
     transition: transform 0.3s ease, border-color 0.3s, color 0.3s;
 }
 
-/* Cambio de color interactivo al pasar el mouse */
 .mini-float-icon:hover {
     border-color: var(--primary-green);
     color: var(--light-green);
-    transform: scale(1.1) !important; /* Mantiene el tamaño interactivo sobre la animación */
+    transform: scale(1.1) !important;
     cursor: pointer;
 }
 
-/* Posicionamiento estratégico alrededor del óvalo central */
 .icon-top-left {
     top: 12%;
     left: -5%;
@@ -824,22 +863,21 @@ body {
 .icon-top-right {
     top: 20%;
     right: -5%;
-    animation: floatingIcon 4.5s ease-in-out infinite 0.7s; /* Desfase de tiempo */
+    animation: floatingIcon 4.5s ease-in-out infinite 0.7s;
 }
 
 .icon-bottom-left {
     bottom: 25%;
     left: -8%;
-    animation: floatingIcon 5s ease-in-out infinite 1.2s; /* Desfase de tiempo */
+    animation: floatingIcon 5s ease-in-out infinite 1.2s;
 }
 
 .icon-bottom-right {
     bottom: 18%;
     right: -4%;
-    animation: floatingIcon 4.2s ease-in-out infinite 0.3s; /* Desfase de tiempo */
+    animation: floatingIcon 4.2s ease-in-out infinite 0.3s;
 }
 
-/* Responsive: Ajuste para pantallas pequeñas para que no se desborden */
 @media (max-width: 480px) {
     .icon-top-left { left: 2%; }
     .icon-top-right { right: 2%; }
@@ -847,23 +885,14 @@ body {
     .icon-bottom-right { right: -2%; }
 }
 
-/* ==========================================================================
-   ANIMACIÓN DE LEVITACIÓN SUAVE
-   ========================================================================== */
 @keyframes floatingIcon {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-10px); /* Sube suavemente */
-    }
-    100% {
-        transform: translateY(0px);
-    }
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
 }
 
 /* ==========================================================================
-   FOOTER PREMIUM - VERSIÓN LIMPIA Y COMPACTA (CORREGIDA)
+   FOOTER PREMIUM - VERSIÓN LIMPIA Y COMPACTA
    ========================================================================== */
 .footer-dark-wrapper {
     background-color: #f8fafc;
@@ -873,7 +902,6 @@ body {
     box-sizing: border-box;
 }
 
-/* Tarjeta CTA Superior */
 .cta-dark-card {
     max-width: 1200px;
     margin: 0 auto 40px auto;
@@ -945,7 +973,6 @@ body {
     background-color: #166534;
 }
 
-/* Cuerpo del Footer Negro/Verde Bosque */
 .main-dark-footer {
     background-color: #091512;
     color: #94a3b8;
@@ -967,7 +994,6 @@ body {
     box-sizing: border-box;
 }
 
-/* Marca y Descripción */
 .logo-text-dark {
     color: #ffffff;
     font-size: 22px;
@@ -991,7 +1017,6 @@ body {
     opacity: 0.7;
 }
 
-/* Redes Sociales */
 .social-icons-row {
     display: flex;
     gap: 12px;
@@ -1023,7 +1048,6 @@ body {
     transform: translateY(-3px);
 }
 
-/* Listas de Enlaces */
 .footer-dark-links h3 {
     color: #22c55e;
     font-size: 13px;
@@ -1068,7 +1092,6 @@ body {
     transform: translateX(3px);
 }
 
-/* Columna Contacto */
 .contact-dark-col ul li {
     color: #cbd5e1;
     font-size: 14px;
@@ -1089,7 +1112,6 @@ body {
     color: #22c55e;
 }
 
-/* Barra Inferior del Copyright */
 .footer-dark-bottom {
     max-width: 1200px;
     margin: 0 auto;
@@ -1118,13 +1140,12 @@ body {
     z-index: 10;
 }
 
-/* Silueta Paisaje Compacta */
 .field-silhouette-deco {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 80px; /* Reducido a 80px para que no estorbe */
+    height: 80px;
     background-repeat: no-repeat;
     background-position: bottom center;
     background-size: cover;
@@ -1134,9 +1155,6 @@ body {
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'><path d='M0,90 Q150,70 350,95 T750,85 T1200,100 L1200,120 L0,120 Z' fill='%2315803d'/><path d='M0,100 Q250,85 500,105 T1000,95 T1200,110 L1200,120 L0,120 Z' fill='%23166534'/><circle cx='850' cy='85' r='12' fill='%23115e59'/><circle cx='865' cy='80' r='15' fill='%23115e59'/><circle cx='880' cy='88' r='10' fill='%23115e59'/><rect x='862' y='95' width='4' height='15' fill='%230f172a'/><g transform='translate(950, 82) scale(0.4)' fill='%23115e59'><path d='M 20 10 L 35 10 Q 38 10 38 13 L 38 22 Q 35 25 30 25 L 10 25 Q 5 25 5 20 L 5 15 Q 5 10 20 10 Z'/><rect x='8' y='24' width='3' height='10'/><rect x='14' y='24' width='3' height='10'/><rect x='28' y='24' width='3' height='10'/><rect x='34' y='24' width='3' height='10'/><path d='M 37 12 L 45 15 L 43 20 L 37 17 Z'/></g><g transform='translate(1020, 85) scale(0.35)' fill='%23115e59'><path d='M 20 10 L 35 10 Q 38 10 38 13 L 38 22 Q 35 25 30 25 L 10 25 Q 5 25 5 20 L 5 15 Q 5 10 20 10 Z'/><rect x='8' y='24' width='3' height='10'/><rect x='14' y='24' width='3' height='10'/><rect x='28' y='24' width='3' height='10'/><rect x='34' y='24' width='3' height='10'/><path d='M 37 12 L 45 15 L 43 20 L 37 17 Z'/></g></svg>");
 }
 
-/* ==========================================================================
-   RESPONSIVE MÓVIL REPARADO
-   ========================================================================== */
 @media (max-width: 768px) {
     .cta-dark-card {
         flex-direction: column;
@@ -1153,11 +1171,11 @@ body {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 35px;
-        padding-left: 25px;  /* Agrega espacio seguro a los lados */
-        padding-right: 25px; /* Agrega espacio seguro a los lados */
+        padding-left: 25px;
+        padding-right: 25px;
     }
     .brand-dark-desc {
-        padding: 0 10px; /* Evita que el texto roce los bordes del celular */
+        padding: 0 10px;
         margin-bottom: 25px;
     }
     .social-icons-row {
@@ -1165,7 +1183,7 @@ body {
         margin-bottom: 10px;
     }
     .footer-dark-links ul li {
-        margin-bottom: 18px; /* Más separación vertical para facilitar el toque táctil */
+        margin-bottom: 18px;
     }
     .footer-dark-links ul li a {
         justify-content: center;
@@ -1183,288 +1201,109 @@ body {
         gap: 15px;
         padding-top: 40px;
     }
+}
 
+/* Botón Cambiar Modo Premium */
+#theme-toggle {
+    background-color: transparent;
+    border: 2px solid var(--light-green);
+    color: var(--text-dark);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1; /* Evita que la fuente de emoji (🌙) infle la altura del botón */
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+#theme-toggle:hover {
+    background-color: var(--light-green);
+    color: #ffffff;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(132, 204, 22, 0.2);
 }
 
 /* ==========================================================================
-   ESTILOS BASE Y RESPONSIVOS PARA LA PANTALLA DE INICIAR SESIÓN (LOGIN)
+   CORRECCIONES DE CONTRASTE PARA MODO OSCURO
+   (aplanado: sin anidamiento nativo, para compatibilidad amplia)
    ========================================================================== */
-
-/* 1. Contenedor principal que envuelve los dos paneles (Computadora) */
-.login-container {
-    display: flex;
-    min-height: 90vh;
-    max-width: 1100px;
-    margin: 40px auto;
-    background-color: #ffffff;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e5e7eb;
+body.dark-mode .hero-content h1 {
+    color: #ffffff !important;
+    /* Sin font-size fijo: así respeta el tamaño responsive
+       (clamp en desktop, 32px en el breakpoint de 768px) en vez
+       de quedar siempre en 3rem en cualquier pantalla */
 }
 
-/* Panel Izquierdo Informativo (Computadora) */
-.info-panel {
-    flex: 1;
-    background-color: var(--primary-green);
-    background-image: linear-gradient(rgba(44, 76, 55, 0.85), rgba(44, 76, 55, 0.95)), url('../img/portada.png');
-    background-size: cover;
-    background-position: center;
-    padding: 50px;
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+body.dark-mode .hero-content p {
+    color: #e2e8f0 !important;
 }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+body.dark-mode .nav-menu a {
+    color: #9ca3af !important;
 }
 
-.logo-container h1 {
-    font-size: 24px;
-    font-weight: 700;
-    color: #ffffff;
+body.dark-mode .nav-menu a:hover {
+    color: #ffffff !important;
 }
 
-.logo-container span {
-    color: var(--light-green);
+body.dark-mode .badge {
+    background-color: rgba(44, 76, 55, 0.3) !important;
+    color: #84cc16 !important;
+    border: 1px solid rgba(132, 204, 22, 0.4) !important;
 }
 
-.slogan {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #e2e8f0;
-    margin-top: 30px;
-    margin-bottom: auto;
+body.dark-mode .about-badge {
+    color: #84cc16 !important; /* solo cambia el color del texto, sin caja ni borde */
 }
 
-.features-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    margin-top: 40px;
+body.dark-mode span.green-text {
+    color: #84cc16 !important;
 }
 
-.feature-item h2 {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--light-green);
-    margin-bottom: 4px;
+body.dark-mode .cta-dark-card {
+    background-color: #14201c !important;
+    border: 1px solid #2c3e3a !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
 }
 
-.feature-item p {
-    font-size: 13px;
-    color: #cbd5e1;
+body.dark-mode .cta-dark-text h2 {
+    color: #ffffff !important;
 }
 
-/* Panel Derecho del Formulario (Computadora) */
-.form-panel {
-    flex: 1;
-    padding: 60px 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #ffffff;
-}
-
-.form-header {
-    margin-bottom: 35px;
-}
-
-.form-header h2 {
-    font-size: 26px;
-    color: var(--text-dark);
-    margin-bottom: 8px;
-    font-weight: 700;
-}
-
-.form-header p {
-    color: var(--text-muted);
-    font-size: 14px;
-}
-
-.login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.input-group label {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-dark);
-}
-
-.input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-/* Inputs Premium estilizados */
-.input-wrapper input {
-    width: 100%;
-    padding: 14px 16px;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 15px;
-    outline: none;
-    transition: all 0.2s ease;
-}
-
-.input-wrapper input:focus {
-    border-color: var(--primary-green);
-    box-shadow: 0 0 0 3px rgba(44, 76, 55, 0.1);
-}
-
-.form-actions {
-    text-align: right;
-}
-
-.forgot-password {
-    font-size: 13px;
-    color: var(--primary-green);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.forgot-password:hover {
-    text-decoration: underline;
-}
-
-/* Botones */
-.btn-submit {
-    background-color: var(--primary-green);
-    color: #ffffff;
-    border: none;
-    padding: 14px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.btn-submit:hover {
-    background-color: #1e3526;
-}
-
-.divider {
-    text-align: center;
-    position: relative;
-    margin: 10px 0;
-}
-
-.divider::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #e2e8f0;
-    z-index: 1;
-}
-
-.divider span {
-    background-color: #ffffff;
-    padding: 0 15px;
-    color: var(--text-muted);
-    font-size: 14px;
-    position: relative;
-    z-index: 2;
-}
-
-.btn-google {
-    background-color: #ffffff;
-    color: var(--text-dark);
-    border: 1px solid #cbd5e1;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.btn-google:hover {
-    background-color: #f8fafc;
-}
-
-.form-footer {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 14px;
-    color: var(--text-muted);
-}
-
-.form-footer a {
-    color: var(--primary-green);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.form-footer a:hover {
-    text-decoration: underline;
-}
-
-/* Estilo simple para el footer general oculto en login */
-.main-footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 13px;
-    color: var(--text-muted);
+body.dark-mode .cta-dark-text p {
+    color: #9ca3af !important;
 }
 
 /* ==========================================================================
-   2. REACOMODO EXCLUSIVO PARA CELULARES (RESPONSIVE)
+   CORRECCIÓN DE CONTRASTE EN TARJETAS DE CARACTERÍSTICAS
    ========================================================================== */
-@media (max-width: 850px) {
-    .login-container {
-        flex-direction: column;
-        margin: 0;
-        border-radius: 0;
-        border: none;
-        min-height: 100vh;
-        box-shadow: none;
-    }
+body.dark-mode .features-grid h3,
+body.dark-mode .feature-card h3,
+body.dark-mode div[class*="card"] h3,
+body.dark-mode div[class*="feature"] h3 {
+    color: #ffffff !important; /* Cambia a #84cc16 si prefieres que los títulos sean verde lima */
+}
 
-    /* Ocultamos el panel de beneficios izquierdo para que no estorbe en celular */
-    .info-panel {
-        display: none !important;
-    }
+body.dark-mode .feature-card p,
+body.dark-mode div[class*="card"] p,
+body.dark-mode div[class*="feature"] p {
+    color: #cbd5e1 !important;
+}
 
-    /* El formulario toma el 100% de la pantalla del celular de forma limpia */
-    .form-panel {
-        width: 100%;
-        padding: 40px 24px;
-    }
-
-    .form-header h2 {
-        font-size: 24px;
-    }
-
-    /* Inputs más grandes para que sean fáciles de tocar con el dedo */
-    .input-wrapper input {
-        padding: 15px;
-        font-size: 16px; /* Evita zoom automático molesto en celulares */
-    }
-
-    .btn-submit, .btn-google {
-        padding: 15px;
-        font-size: 16px;
-    }
+/* ==========================================================================
+   REESCRITURA DE TÍTULOS GRANDES EN MODO OSCURO
+   ========================================================================== */
+body.dark-mode .features-section h2,
+body.dark-mode .features h2,
+body.dark-mode div[class*="features"] h2 {
+    color: #ffffff !important;
+    /* Sin font-size/line-height fijos: respeta el tamaño responsive
+       de .section-title h2 (38px desktop, 32px en mobile) en vez
+       de imponer 2.5rem siempre */
+    font-weight: 700 !important;
 }
