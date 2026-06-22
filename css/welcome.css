@@ -141,7 +141,6 @@ button:focus-visible {
     padding-bottom: 4px;
 }
 
-/* Botón de iniciar sesión - 100% Verde Lima de tu imagen */
 .btn-nav-login {
     text-decoration: none;
     color: var(--text-dark);
@@ -1286,7 +1285,7 @@ body.dark-mode .features-grid h3,
 body.dark-mode .feature-card h3,
 body.dark-mode div[class*="card"] h3,
 body.dark-mode div[class*="feature"] h3 {
-    color: #ffffff !important; /* Cambia a #84cc16 si prefieres que los títulos sean verde lima */
+    color: #ffffff !important; 
 }
 
 body.dark-mode .feature-card p,

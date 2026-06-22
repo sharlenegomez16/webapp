@@ -78,7 +78,7 @@ button:focus-visible {
 }
 
 body.dark-mode .login-container {
-    background-color: var(--login-bg); /* mismo negro casi puro que el index, no el tono de tarjeta */
+    background-color: var(--login-bg); 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
@@ -102,8 +102,6 @@ body.dark-mode .login-container {
     background-position: center 20%;
     background-repeat: no-repeat;
     border-radius: 12px 0 0 12px;
-
-    /* Text-shadow sutil para que el texto blanco se siga leyendo bien */
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
@@ -192,7 +190,7 @@ body.dark-mode .login-container {
 }
 
 body.dark-mode .form-panel {
-    background-color: var(--login-bg); /* mismo negro casi puro que el index */
+    background-color: var(--login-bg); 
 }
 
 /* Encabezado del formulario */
